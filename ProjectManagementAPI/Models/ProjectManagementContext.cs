@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Models
 {
-    public class ProjectContext : DbContext
+    public class ProjectManagementContext : DbContext
     {
-        public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
+        public ProjectManagementContext(DbContextOptions<ProjectManagementContext> options) : base(options)
         {
         }
-
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Task> Tasks { get; set; }
     }
 }

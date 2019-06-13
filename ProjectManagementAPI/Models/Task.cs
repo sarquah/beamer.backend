@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Models
 {
-    public class Project
+    public class Task
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -14,11 +15,6 @@ namespace ProjectManagementAPI.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Owner { get; set; }
-        public ICollection<Task> Tasks { get; set; }
-
-        public Project()
-        {
-            Tasks = new List<Task>();
-        }
+        public long ProjectId { get; set; }
     }
 }
