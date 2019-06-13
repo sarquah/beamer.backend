@@ -11,9 +11,9 @@ namespace ProjectManagementAPI.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly ProjectContext _context;
+        private readonly ProjectManagementContext _context;
 
-        public ProjectController(ProjectContext context)
+        public ProjectController(ProjectManagementContext context)
         {
             _context = context;
 
@@ -28,14 +28,14 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("projects")]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            return await _context.Projects.Include(t => t.Tasks).ToListAsync();
         }
 
         // GET: api/v1/project/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> GetProject(long id)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = await _context.Projects.Include(t => t.Tasks).FirstOrDefaultAsync(p => p.Id == id);
             if (project == null)
             {
                 return NotFound();

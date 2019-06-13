@@ -20,8 +20,7 @@ namespace ProjectManagementAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProjectContext>(opt => opt.UseInMemoryDatabase("Projects"));
-            services.AddDbContext<TaskContext>(opt => opt.UseInMemoryDatabase("Tasks"));
+            services.AddDbContext<ProjectManagementContext>(opt => opt.UseInMemoryDatabase("Projects"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

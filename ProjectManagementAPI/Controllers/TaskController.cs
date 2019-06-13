@@ -11,14 +11,15 @@ namespace ProjectManagementAPI.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly TaskContext _context;
+        private readonly ProjectManagementContext _context;
 
-        public TaskController(TaskContext context)
+        public TaskController(ProjectManagementContext context)
         {
             _context = context;
+
             if (_context.Tasks.Count() == 0)
             {
-                _context.Tasks.Add(new Models.Task { Name = "Empty task" });
+                _context.Tasks.Add(new Models.Task { Name = "Empty task", ProjectId = 1 });
                 _context.SaveChanges();
             }
         }
@@ -46,6 +47,11 @@ namespace ProjectManagementAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Models.Task>> CreateTask(Models.Task task)
         {
+            var project = await _context.Projects.FindAsync(task.ProjectId);
+            if (project == null)
+            {
+                return NotFound();
+            }
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);

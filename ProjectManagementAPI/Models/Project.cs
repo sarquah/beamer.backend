@@ -14,7 +14,7 @@ namespace ProjectManagementAPI.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Owner { get; set; }
-        public List<Task> Tasks { get; set; }
+        public ICollection<Task> Tasks { get; set; }
 
         public Project()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,5 +15,6 @@ namespace ProjectManagementAPI.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Owner { get; set; }
+        public long ProjectId { get; set; }
     }
 }
