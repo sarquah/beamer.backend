@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Models
 {
-    public class Project
+    public class Task
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -14,11 +14,5 @@ namespace ProjectManagementAPI.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Owner { get; set; }
-        public List<Task> Tasks { get; set; }
-
-        public Project()
-        {
-            Tasks = new List<Task>();
-        }
     }
 }

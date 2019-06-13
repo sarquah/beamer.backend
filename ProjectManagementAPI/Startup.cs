@@ -21,6 +21,7 @@ namespace ProjectManagementAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProjectContext>(opt => opt.UseInMemoryDatabase("Projects"));
+            services.AddDbContext<TaskContext>(opt => opt.UseInMemoryDatabase("Tasks"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
