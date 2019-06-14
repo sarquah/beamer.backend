@@ -16,12 +16,6 @@ namespace ProjectManagementAPI.Controllers
         public ProjectController(ProjectManagementContext context)
         {
             _context = context;
-
-            if (_context.Projects.Count()==0)
-            {
-                _context.Projects.Add(new Project { Name = "Empty project" });
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/v1/project/projects

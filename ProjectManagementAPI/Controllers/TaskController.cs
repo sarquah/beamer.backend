@@ -15,13 +15,7 @@ namespace ProjectManagementAPI.Controllers
 
         public TaskController(ProjectManagementContext context)
         {
-            _context = context;
-
-            if (_context.Tasks.Count() == 0)
-            {
-                _context.Tasks.Add(new Models.Task { Name = "Empty task", ProjectId = 1 });
-                _context.SaveChanges();
-            }
+            _context = context;            
         }
 
         // GET: api/v1/task/tasks
