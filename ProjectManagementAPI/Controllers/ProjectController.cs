@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +21,7 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("projects")]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _context.Projects.Include(t => t.Tasks).ToListAsync();
+            return await _context.Projects.Include(p => p.Tasks).Include(p => p.ProjectOwner).ToListAsync();
         }
 
         // GET: api/v1/project/1

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Models
 {
@@ -14,7 +11,9 @@ namespace ProjectManagementAPI.Models
         public string Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Owner { get; set; }
+        public long TaskOwnerId { get; set; }
+        [ForeignKey("TaskOwnerId")]
+        public User TaskOwner { get; set; }
         public long ProjectId { get; set; }
     }
 }

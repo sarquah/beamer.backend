@@ -8,6 +8,22 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190614102522_initialcreate.cs" />
     <Compile Remove="Migrations\20190614102522_initialcreate.Designer.cs" />
+    <Compile Remove="Migrations\20190614124108_Users.cs" />
+    <Compile Remove="Migrations\20190614124108_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614125630_Users.cs" />
+    <Compile Remove="Migrations\20190614125630_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614133309_Users.cs" />
+    <Compile Remove="Migrations\20190614133309_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614135010_Users.cs" />
+    <Compile Remove="Migrations\20190614135010_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614144135_Users.cs" />
+    <Compile Remove="Migrations\20190614144135_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614150955_Users.cs" />
+    <Compile Remove="Migrations\20190614150955_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614153114_Users.cs" />
+    <Compile Remove="Migrations\20190614153114_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614154213_Users.cs" />
+    <Compile Remove="Migrations\20190614154213_Users.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
