@@ -10,7 +10,7 @@ using ProjectManagementAPI.Models;
 namespace ProjectManagementAPI.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20190718190511_Users")]
+    [Migration("20190718193950_Users")]
     partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
