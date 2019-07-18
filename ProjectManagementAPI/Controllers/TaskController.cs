@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPI.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Controllers
@@ -22,14 +21,14 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("tasks")]
         public async Task<ActionResult<IEnumerable<Models.Task>>> GetTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks.Include(t => t.Owner).Include(t => t.Project).ToListAsync();
         }
 
         // GET: api/v1/task/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Models.Task>> GetTask(long id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _context.Tasks.Include(t => t.Owner).Include(t => t.Project).FirstOrDefaultAsync(t => t.Id == id);
             if (task == null)
             {
                 return NotFound();
