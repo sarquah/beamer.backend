@@ -10,7 +10,7 @@ using ProjectManagementAPI.Models;
 namespace ProjectManagementAPI.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20190718141647_Users")]
+    [Migration("20190718190511_Users")]
     partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<long?>("ProjectOwnerId");
+                    b.Property<long?>("OwnerId");
 
                     b.Property<DateTime>("StartDate");
 
@@ -41,7 +41,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectOwnerId");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Projects");
                 });
@@ -58,19 +58,19 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<long>("ProjectId");
+                    b.Property<long?>("OwnerId");
+
+                    b.Property<long?>("ProjectId");
 
                     b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Status");
 
-                    b.Property<long?>("TaskOwnerId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("OwnerId");
 
-                    b.HasIndex("TaskOwnerId");
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tasks");
                 });
@@ -94,21 +94,20 @@ namespace ProjectManagementAPI.Migrations
 
             modelBuilder.Entity("ProjectManagementAPI.Models.Project", b =>
                 {
-                    b.HasOne("ProjectManagementAPI.Models.User", "ProjectOwner")
-                        .WithMany("Projects")
-                        .HasForeignKey("ProjectOwnerId");
+                    b.HasOne("ProjectManagementAPI.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("ProjectManagementAPI.Models.Task", b =>
                 {
-                    b.HasOne("ProjectManagementAPI.Models.Project")
-                        .WithMany("Tasks")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ProjectManagementAPI.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
 
-                    b.HasOne("ProjectManagementAPI.Models.User", "TaskOwner")
+                    b.HasOne("ProjectManagementAPI.Models.Project", "Project")
                         .WithMany("Tasks")
-                        .HasForeignKey("TaskOwnerId");
+                        .HasForeignKey("ProjectId");
                 });
 #pragma warning restore 612, 618
         }

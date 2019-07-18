@@ -7,6 +7,10 @@ namespace ProjectManagementAPI.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tasks_Projects_ProjectId",
+                table: "Tasks");
+
             migrationBuilder.DropColumn(
                 name: "Owner",
                 table: "Tasks");
@@ -15,13 +19,19 @@ namespace ProjectManagementAPI.Migrations
                 name: "Owner",
                 table: "Projects");
 
+            migrationBuilder.AlterColumn<long>(
+                name: "ProjectId",
+                table: "Tasks",
+                nullable: true,
+                oldClrType: typeof(long));
+
             migrationBuilder.AddColumn<long>(
-                name: "TaskOwnerId",
+                name: "OwnerId",
                 table: "Tasks",
                 nullable: true);
 
             migrationBuilder.AddColumn<long>(
-                name: "ProjectOwnerId",
+                name: "OwnerId",
                 table: "Projects",
                 nullable: true);
 
@@ -41,28 +51,36 @@ namespace ProjectManagementAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_TaskOwnerId",
+                name: "IX_Tasks_OwnerId",
                 table: "Tasks",
-                column: "TaskOwnerId");
+                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_ProjectOwnerId",
+                name: "IX_Projects_OwnerId",
                 table: "Projects",
-                column: "ProjectOwnerId");
+                column: "OwnerId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Projects_Users_ProjectOwnerId",
+                name: "FK_Projects_Users_OwnerId",
                 table: "Projects",
-                column: "ProjectOwnerId",
+                column: "OwnerId",
                 principalTable: "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Tasks_Users_TaskOwnerId",
+                name: "FK_Tasks_Users_OwnerId",
                 table: "Tasks",
-                column: "TaskOwnerId",
+                column: "OwnerId",
                 principalTable: "Users",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Tasks_Projects_ProjectId",
+                table: "Tasks",
+                column: "ProjectId",
+                principalTable: "Projects",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -70,31 +88,42 @@ namespace ProjectManagementAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Projects_Users_ProjectOwnerId",
+                name: "FK_Projects_Users_OwnerId",
                 table: "Projects");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Tasks_Users_TaskOwnerId",
+                name: "FK_Tasks_Users_OwnerId",
+                table: "Tasks");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tasks_Projects_ProjectId",
                 table: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropIndex(
-                name: "IX_Tasks_TaskOwnerId",
+                name: "IX_Tasks_OwnerId",
                 table: "Tasks");
 
             migrationBuilder.DropIndex(
-                name: "IX_Projects_ProjectOwnerId",
+                name: "IX_Projects_OwnerId",
                 table: "Projects");
 
             migrationBuilder.DropColumn(
-                name: "TaskOwnerId",
+                name: "OwnerId",
                 table: "Tasks");
 
             migrationBuilder.DropColumn(
-                name: "ProjectOwnerId",
+                name: "OwnerId",
                 table: "Projects");
+
+            migrationBuilder.AlterColumn<long>(
+                name: "ProjectId",
+                table: "Tasks",
+                nullable: false,
+                oldClrType: typeof(long),
+                oldNullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "Owner",
@@ -105,6 +134,14 @@ namespace ProjectManagementAPI.Migrations
                 name: "Owner",
                 table: "Projects",
                 nullable: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Tasks_Projects_ProjectId",
+                table: "Tasks",
+                column: "ProjectId",
+                principalTable: "Projects",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
     }
 }
