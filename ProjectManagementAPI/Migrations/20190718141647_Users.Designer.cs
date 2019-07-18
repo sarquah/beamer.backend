@@ -10,7 +10,7 @@ using ProjectManagementAPI.Models;
 namespace ProjectManagementAPI.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20190614154331_Users")]
+    [Migration("20190718141647_Users")]
     partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<long>("ProjectOwnerId");
+                    b.Property<long?>("ProjectOwnerId");
 
                     b.Property<DateTime>("StartDate");
 
@@ -64,7 +64,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<string>("Status");
 
-                    b.Property<long>("TaskOwnerId");
+                    b.Property<long?>("TaskOwnerId");
 
                     b.HasKey("Id");
 
@@ -96,8 +96,7 @@ namespace ProjectManagementAPI.Migrations
                 {
                     b.HasOne("ProjectManagementAPI.Models.User", "ProjectOwner")
                         .WithMany("Projects")
-                        .HasForeignKey("ProjectOwnerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ProjectOwnerId");
                 });
 
             modelBuilder.Entity("ProjectManagementAPI.Models.Task", b =>
@@ -109,8 +108,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.HasOne("ProjectManagementAPI.Models.User", "TaskOwner")
                         .WithMany("Tasks")
-                        .HasForeignKey("TaskOwnerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("TaskOwnerId");
                 });
 #pragma warning restore 612, 618
         }

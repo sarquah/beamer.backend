@@ -21,14 +21,14 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("users")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.Include(u => u.Projects).Include(u => u.Tasks).ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            var user = await _context.Users.Include(u => u.Projects).Include(u => u.Tasks).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();

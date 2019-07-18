@@ -9,13 +9,9 @@ namespace ProjectManagementAPI.Models
         public string Name { get; set; }
         public string Department { get; set; }
         public string Role { get; set; }
-        public List<Task> Tasks { get; set; }
-        public List<Project> Projects { get; set; }
-
-        public User()
-        {
-            Tasks = new List<Task>();
-            Projects = new List<Project>();
-        }
+        [InverseProperty("ProjectOwner")]
+        public List<Project> Projects { get; set; } = new List<Project>();
+        [InverseProperty("TaskOwner")]
+        public List<Task> Tasks { get; set; } = new List<Task>();
     }
 }

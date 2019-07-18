@@ -12,14 +12,7 @@ namespace ProjectManagementAPI.Models
         public string Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public long ProjectOwnerId { get; set; }
-        [ForeignKey("ProjectOwnerId")]
         public User ProjectOwner { get; set; }
-        public List<Task> Tasks { get; set; }
-
-        public Project()
-        {
-            Tasks = new List<Task>();
-        }
+        public List<Task> Tasks { get; set; } = new List<Task>();
     }
 }

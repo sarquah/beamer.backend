@@ -18,14 +18,12 @@ namespace ProjectManagementAPI.Migrations
             migrationBuilder.AddColumn<long>(
                 name: "TaskOwnerId",
                 table: "Tasks",
-                nullable: false,
-                defaultValue: 0L);
+                nullable: true);
 
             migrationBuilder.AddColumn<long>(
                 name: "ProjectOwnerId",
                 table: "Projects",
-                nullable: false,
-                defaultValue: 0L);
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Users",

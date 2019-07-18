@@ -24,6 +24,10 @@
     <Compile Remove="Migrations\20190614153114_Users.Designer.cs" />
     <Compile Remove="Migrations\20190614154213_Users.cs" />
     <Compile Remove="Migrations\20190614154213_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614154331_Users.cs" />
+    <Compile Remove="Migrations\20190614154331_Users.Designer.cs" />
+    <Compile Remove="Migrations\20190614160156_Users.cs" />
+    <Compile Remove="Migrations\20190614160156_Users.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +35,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
   </ItemGroup>
 
 </Project>
