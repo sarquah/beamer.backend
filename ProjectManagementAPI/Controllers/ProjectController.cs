@@ -8,7 +8,7 @@ namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/project")]
     [ApiController]
-    public class ProjectController : ControllerBase
+    public class ProjectController : ControllerBase, IProjectController
     {
         private readonly ProjectManagementContext _context;
 

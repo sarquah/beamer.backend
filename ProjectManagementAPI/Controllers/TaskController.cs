@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjectManagementAPI.Interfaces;
 using ProjectManagementAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/task")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class TaskController : ControllerBase, ITaskController
     {
         private readonly ProjectManagementContext _context;
 

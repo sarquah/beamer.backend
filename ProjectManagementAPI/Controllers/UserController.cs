@@ -2,13 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjectManagementAPI.Interfaces;
 using ProjectManagementAPI.Models;
 
 namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : ControllerBase, IUserController
     {
         private readonly ProjectManagementContext _context;
 
