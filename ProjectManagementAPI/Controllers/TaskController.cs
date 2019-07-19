@@ -9,11 +9,11 @@ namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/task")]
     [ApiController]
-    public class TaskController : ControllerBase, ITaskController
+    public class TaskController : ControllerBase, ITaskService
     {
-        private readonly ProjectManagementContext _context;
+        private readonly AppDbContext _context;
 
-        public TaskController(ProjectManagementContext context)
+        public TaskController(AppDbContext context)
         {
             _context = context;            
         }

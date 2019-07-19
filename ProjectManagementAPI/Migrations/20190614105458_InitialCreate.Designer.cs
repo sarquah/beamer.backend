@@ -9,7 +9,7 @@ using ProjectManagementAPI.Models;
 
 namespace ProjectManagementAPI.Migrations
 {
-    [DbContext(typeof(ProjectManagementContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20190614105458_InitialCreate")]
     partial class InitialCreate
     {

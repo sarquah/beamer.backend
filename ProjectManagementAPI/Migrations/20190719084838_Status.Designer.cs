@@ -9,7 +9,7 @@ using ProjectManagementAPI.Models;
 
 namespace ProjectManagementAPI.Migrations
 {
-    [DbContext(typeof(ProjectManagementContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20190719084838_Status")]
     partial class Status
     {

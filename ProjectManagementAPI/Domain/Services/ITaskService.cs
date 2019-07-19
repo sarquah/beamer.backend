@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Interfaces
 {
-    interface ITaskController
+    public interface ITaskService
     {
         Task<ActionResult<IEnumerable<Models.Task>>> GetTasks();
         Task<ActionResult<Models.Task>> GetTask(long id);

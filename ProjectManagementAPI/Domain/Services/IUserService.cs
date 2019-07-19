@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Interfaces
 {
-    interface IUserController
+    public interface IUserService
     {
         Task<ActionResult<IEnumerable<User>>> GetUsers();
         Task<ActionResult<User>> GetUser(long id);

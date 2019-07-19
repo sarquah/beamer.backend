@@ -8,7 +8,7 @@ using ProjectManagementAPI.Models;
 
 namespace ProjectManagementAPI.Migrations
 {
-    [DbContext(typeof(ProjectManagementContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ProjectManagementContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

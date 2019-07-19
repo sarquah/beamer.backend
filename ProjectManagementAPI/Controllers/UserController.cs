@@ -9,11 +9,11 @@ namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
-    public class UserController : ControllerBase, IUserController
+    public class UserController : ControllerBase, IUserService
     {
-        private readonly ProjectManagementContext _context;
+        private readonly AppDbContext _context;
 
-        public UserController(ProjectManagementContext context)
+        public UserController(AppDbContext context)
         {
             _context = context;
         }
