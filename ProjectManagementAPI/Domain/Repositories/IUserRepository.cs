@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ProjectManagementAPI.Interfaces
+namespace ProjectManagementAPI.Domain.Repositories
 {
-    public interface IUserService
+    public interface IUserRepository
     {
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(long id);

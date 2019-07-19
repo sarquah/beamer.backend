@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ProjectManagementAPI.Interfaces
+namespace ProjectManagementAPI.Domain.Repositories
 {
-    public interface ITaskService
+    public interface ITaskRepository
     {
         Task<IEnumerable<Models.Task>> GetTasks();
         Task<Models.Task> GetTask(long id);

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProjectManagementAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ProjectManagementAPI.Models;
 
 namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/project")]
-    public class ProjectController : Controller
+    [ApiController]
+    public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
 
@@ -19,9 +18,10 @@ namespace ProjectManagementAPI.Controllers
 
         // GET: api/v1/project/projects
         [HttpGet("projects")]
-        public async Task<IEnumerable<Project>> GetProjects()
+        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _projectService.GetProjects();                
+            var projects = await _projectService.GetProjects();
+            return Ok(projects);
         }
 
         // GET: api/v1/project/1
@@ -33,23 +33,26 @@ namespace ProjectManagementAPI.Controllers
 
         // POST: api/v1/project
         [HttpPost]
-        public void CreateProject(Project project)
+        public async Task<ActionResult> CreateProject(Project project)
         {
-            _projectService.CreateProject(project);            
+            await _projectService.CreateProject(project);
+            return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
 
         // PUT: api/v1/project/1
         [HttpPut("{id}")]
-        public void UpdateProject(long id, Project project)
+        public async Task<ActionResult> UpdateProject(long id, Project project)
         {
-            _projectService.UpdateProject(id, project);            
+            await _projectService.UpdateProject(id, project);
+            return NoContent();
         }
 
         // DELETE: api/v1/project/1
         [HttpDelete("{id}")]
-        public void DeleteProject(long id)
+        public async Task<ActionResult> DeleteProject(long id)
         {
-            _projectService.DeleteProject(id);            
+            await _projectService.DeleteProject(id);
+            return NoContent();
         }
     }
 }

@@ -2,10 +2,9 @@
 using ProjectManagementAPI.Controllers;
 using ProjectManagementAPI.Domain.Repositories;
 using ProjectManagementAPI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementAPI.Services
 {
@@ -18,14 +17,14 @@ namespace ProjectManagementAPI.Services
             _projectRepository = projectRepository;
         }
 
-        public void CreateProject(Project project)
+        public async Task CreateProject(Project project)
         {
-            _projectRepository.CreateProject(project);
+           await _projectRepository.CreateProject(project);
         }
 
-        public void DeleteProject(long id)
+        public async Task DeleteProject(long id)
         {
-            _projectRepository.DeleteProject(id);
+            await _projectRepository.DeleteProject(id);
         }
 
         public async Task<Project> GetProject(long id)
@@ -38,9 +37,9 @@ namespace ProjectManagementAPI.Services
             return await _projectRepository.GetProjects();
         }
 
-        public void UpdateProject(long id, Project project)
+        public async Task UpdateProject(long id, Project project)
         {
-            _projectRepository.UpdateProject(id, project);
+            await _projectRepository.UpdateProject(id, project);
         }
     }
 }

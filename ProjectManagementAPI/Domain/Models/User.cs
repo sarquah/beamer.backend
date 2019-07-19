@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProjectManagementAPI.Models
+﻿namespace ProjectManagementAPI.Models
 {
     public class User
     {
