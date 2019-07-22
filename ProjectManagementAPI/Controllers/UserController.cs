@@ -29,14 +29,19 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            return await _userService.GetUser(id);
+            var user = await _userService.GetUser(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
         }
 
         // POST: api/v1/user
         [HttpPost]
         public async Task<ActionResult> CreateUser(User user)
         {
-            await _userService.CreateUser(user);
+            bool success = await _userService.CreateUser(user);
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
@@ -44,7 +49,15 @@ namespace ProjectManagementAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(long id, User user)
         {
-            await _userService.UpdateUser(id, user);
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
+            bool success = await _userService.UpdateUser(id, user);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
 
@@ -52,7 +65,11 @@ namespace ProjectManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(long id)
         {
-            await _userService.DeleteUser(id);
+            bool success = await _userService.DeleteUser(id);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

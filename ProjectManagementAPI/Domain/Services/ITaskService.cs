@@ -7,8 +7,8 @@ namespace ProjectManagementAPI.Interfaces
     {
         Task<IEnumerable<Models.Task>> GetTasks();
         Task<Models.Task> GetTask(long id);
-        Task CreateTask(Models.Task task);
-        Task UpdateTask(long id, Models.Task task);
-        Task DeleteTask(long id);
+        Task<bool> CreateTask(Models.Task task);
+        Task<bool> UpdateTask(long id, Models.Task task);
+        Task<bool> DeleteTask(long id);
     }
 }

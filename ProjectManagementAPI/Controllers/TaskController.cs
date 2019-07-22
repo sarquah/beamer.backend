@@ -13,7 +13,7 @@ namespace ProjectManagementAPI.Controllers
 
         public TaskController(ITaskService taskService)
         {
-            _taskService = taskService;            
+            _taskService = taskService;
         }
 
         // GET: api/v1/task/tasks
@@ -28,14 +28,19 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Models.Task>> GetTask(long id)
         {
-            return await _taskService.GetTask(id);            
+            var task = await _taskService.GetTask(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return task;
         }
 
         // POST: api/v1/task
         [HttpPost]
         public async Task<ActionResult> CreateTask(Models.Task task)
         {
-            await _taskService.CreateTask(task);
+            bool success = await _taskService.CreateTask(task);
             return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
         }
 
@@ -43,7 +48,15 @@ namespace ProjectManagementAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTask(long id, Models.Task task)
         {
-            await _taskService.UpdateTask(id, task);
+            if (id != task.Id)
+            {
+                return NotFound();
+            }
+            bool success = await _taskService.UpdateTask(id, task);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
 
@@ -51,7 +64,11 @@ namespace ProjectManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTask(long id)
         {
-            await _taskService.DeleteTask(id);
+            bool success = await _taskService.DeleteTask(id);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

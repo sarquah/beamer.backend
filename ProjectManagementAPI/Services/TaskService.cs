@@ -14,14 +14,14 @@ namespace ProjectManagementAPI.Services
             _taskRepository = taskRepository;
         }
 
-        public async Task CreateTask(Models.Task task)
+        public async Task<bool> CreateTask(Models.Task task)
         {
-            await _taskRepository.CreateTask(task);
+            return await _taskRepository.CreateTask(task);
         }
 
-        public async Task DeleteTask(long id)
+        public async Task<bool> DeleteTask(long id)
         {
-            await _taskRepository.DeleteTask(id);
+            return await _taskRepository.DeleteTask(id);
         }
 
         public async Task<Models.Task> GetTask(long id)
@@ -34,9 +34,9 @@ namespace ProjectManagementAPI.Services
             return await _taskRepository.GetTasks();
         }
 
-        public async Task UpdateTask(long id, Models.Task task)
+        public async Task<bool> UpdateTask(long id, Models.Task task)
         {
-            await _taskRepository.UpdateTask(id, task);
+            return await _taskRepository.UpdateTask(id, task);
         }
     }
 }
