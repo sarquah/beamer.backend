@@ -11,6 +11,6 @@ namespace ProjectManagementAPI.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public long? OwnerId { get; set; }
-        public User Owner { get; set; }
+        public virtual User Owner { get; set; }
     }
 }

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectManagementAPI.Models;
+﻿using ProjectManagementAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementAPI.Domain.Repositories
 {
@@ -10,8 +8,8 @@ namespace ProjectManagementAPI.Domain.Repositories
     {
         Task<IEnumerable<Project>> GetProjects();
         Task<Project> GetProject(long id);
-        Task CreateProject(Project project);
-        Task UpdateProject(long id, Project project);
-        Task DeleteProject(long id);
+        Task<bool> CreateProject(Project project);
+        Task<bool> UpdateProject(long id, Project project);
+        Task<bool> DeleteProject(long id);
     }
 }

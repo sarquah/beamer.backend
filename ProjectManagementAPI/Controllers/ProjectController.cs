@@ -28,14 +28,19 @@ namespace ProjectManagementAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> GetProject(long id)
         {
-            return await _projectService.GetProject(id);                
+            var project = await _projectService.GetProject(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            return project;
         }
 
         // POST: api/v1/project
         [HttpPost]
         public async Task<ActionResult> CreateProject(Project project)
         {
-            await _projectService.CreateProject(project);
+            bool success = await _projectService.CreateProject(project);
             return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
 
@@ -43,7 +48,15 @@ namespace ProjectManagementAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProject(long id, Project project)
         {
-            await _projectService.UpdateProject(id, project);
+            if (id != project.Id)
+            {
+                return NotFound();
+            }
+            bool success = await _projectService.UpdateProject(id, project);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
 
@@ -51,7 +64,11 @@ namespace ProjectManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProject(long id)
         {
-            await _projectService.DeleteProject(id);
+            bool success = await _projectService.DeleteProject(id);
+            if (!success)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

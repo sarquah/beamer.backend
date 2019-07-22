@@ -4,6 +4,6 @@ namespace ProjectManagementAPI.Models
 {
     public class Project : Activity
     {
-        public ICollection<Task> Tasks { get; set; } = new List<Task>();
+        public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }
 }
