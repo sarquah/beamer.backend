@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectManagementAPI.Interfaces;
-using ProjectManagementAPI.Models;
+using ProjectManagement.Domain.Models;
+using ProjectManagement.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ProjectManagementAPI.Controllers
+namespace ProjectManagement.API.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]

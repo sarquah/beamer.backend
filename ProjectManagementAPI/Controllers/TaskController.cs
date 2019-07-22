@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectManagementAPI.Interfaces;
+using ProjectManagement.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ProjectManagementAPI.Controllers
+namespace ProjectManagement.API.Controllers
 {
     [Route("api/v1/task")]
     [ApiController]
@@ -18,7 +18,7 @@ namespace ProjectManagementAPI.Controllers
 
         // GET: api/v1/task/tasks
         [HttpGet("tasks")]
-        public async Task<ActionResult<IEnumerable<Models.Task>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<Domain.Models.Task>>> GetTasks()
         {
             var tasks = await _taskService.GetTasks();
             return Ok(tasks);
@@ -26,7 +26,7 @@ namespace ProjectManagementAPI.Controllers
 
         // GET: api/v1/task/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Models.Task>> GetTask(long id)
+        public async Task<ActionResult<Domain.Models.Task>> GetTask(long id)
         {
             var task = await _taskService.GetTask(id);
             if (task == null)
@@ -38,7 +38,7 @@ namespace ProjectManagementAPI.Controllers
 
         // POST: api/v1/task
         [HttpPost]
-        public async Task<ActionResult> CreateTask(Models.Task task)
+        public async Task<ActionResult> CreateTask(Domain.Models.Task task)
         {
             bool success = await _taskService.CreateTask(task);
             return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
@@ -46,7 +46,7 @@ namespace ProjectManagementAPI.Controllers
 
         // PUT: api/v1/task/1
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateTask(long id, Models.Task task)
+        public async Task<ActionResult> UpdateTask(long id, Domain.Models.Task task)
         {
             if (id != task.Id)
             {
