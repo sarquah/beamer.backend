@@ -7,8 +7,8 @@ namespace ProjectManagementAPI.Domain.Repositories
     {
         Task<IEnumerable<Models.Task>> GetTasks();
         Task<Models.Task> GetTask(long id);
-        void CreateTask(Models.Task task);
-        void UpdateTask(long id, Models.Task task);
-        void DeleteTask(long id);
+        Task CreateTask(Models.Task task);
+        Task UpdateTask(long id, Models.Task task);
+        Task DeleteTask(long id);
     }
 }

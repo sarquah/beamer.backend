@@ -41,6 +41,7 @@ namespace ProjectManagementAPI.Persistance.Repositories
 
         public async Task UpdateProject(long id, Project project)
         {
+            project.Id = id;
             _context.Entry(project).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

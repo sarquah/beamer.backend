@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/user")]
-    public class UserController : Controller
+    [ApiController]
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
 
@@ -18,37 +19,41 @@ namespace ProjectManagementAPI.Controllers
 
         // GET: api/v1/user/users
         [HttpGet("users")]
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _userService.GetUsers();
+            var users = await _userService.GetUsers();
+            return Ok(users);
         }
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
-        public async Task<User> GetUser(long id)
+        public async Task<ActionResult<User>> GetUser(long id)
         {
             return await _userService.GetUser(id);
         }
 
         // POST: api/v1/user
         [HttpPost]
-        public void CreateUser(User user)
+        public async Task<ActionResult> CreateUser(User user)
         {
-            _userService.CreateUser(user);
+            await _userService.CreateUser(user);
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
         // PUT: api/v1/user/1
         [HttpPut("{id}")]
-        public void UpdateUser(long id, User user)
+        public async Task<ActionResult> UpdateUser(long id, User user)
         {
-            _userService.UpdateUser(id, user);
+            await _userService.UpdateUser(id, user);
+            return NoContent();
         }
 
         // DELETE: api/v1/user/1
         [HttpDelete("{id}")]
-        public void DeleteUser(long id)
+        public async Task<ActionResult> DeleteUser(long id)
         {
-            _userService.DeleteUser(id);
+            await _userService.DeleteUser(id);
+            return NoContent();
         }
     }
 }

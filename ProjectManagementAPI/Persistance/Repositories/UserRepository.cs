@@ -3,6 +3,7 @@ using ProjectManagementAPI.Domain.Repositories;
 using ProjectManagementAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementAPI.Persistance.Repositories
 {
@@ -10,17 +11,17 @@ namespace ProjectManagementAPI.Persistance.Repositories
     {
         public UserRepository(AppDbContext context) : base(context) { }
 
-        public void CreateUser(User user)
+        public async Task CreateUser(User user)
         {
             _context.Users.Add(user);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteUser(long id)
+        public async Task DeleteUser(long id)
         {
             var user = _context.Users.Find(id);
             _context.Users.Remove(user);
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task<User> GetUser(long id)
@@ -34,10 +35,11 @@ namespace ProjectManagementAPI.Persistance.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public void UpdateUser(long id, User user)
+        public async Task UpdateUser(long id, User user)
         {
+            user.Id = id;
             _context.Entry(user).State = EntityState.Modified;
-            _context.SaveChangesAsync();            
+            await _context.SaveChangesAsync();            
         }
     }
 }

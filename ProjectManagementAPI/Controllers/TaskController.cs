@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace ProjectManagementAPI.Controllers
 {
     [Route("api/v1/task")]
-    public class TaskController : Controller
+    [ApiController]
+    public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
 
@@ -17,37 +18,41 @@ namespace ProjectManagementAPI.Controllers
 
         // GET: api/v1/task/tasks
         [HttpGet("tasks")]
-        public async Task<IEnumerable<Models.Task>> GetTasks()
+        public async Task<ActionResult<IEnumerable<Models.Task>>> GetTasks()
         {
-            return await _taskService.GetTasks();            
+            var tasks = await _taskService.GetTasks();
+            return Ok(tasks);
         }
 
         // GET: api/v1/task/1
         [HttpGet("{id}")]
-        public async Task<Models.Task> GetTask(long id)
+        public async Task<ActionResult<Models.Task>> GetTask(long id)
         {
             return await _taskService.GetTask(id);            
         }
 
         // POST: api/v1/task
         [HttpPost]
-        public void CreateTask(Models.Task task)
+        public async Task<ActionResult> CreateTask(Models.Task task)
         {
-            _taskService.CreateTask(task);            
+            await _taskService.CreateTask(task);
+            return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
         }
 
         // PUT: api/v1/task/1
         [HttpPut("{id}")]
-        public void UpdateTask(long id, Models.Task task)
+        public async Task<ActionResult> UpdateTask(long id, Models.Task task)
         {
-            _taskService.UpdateTask(id, task);            
+            await _taskService.UpdateTask(id, task);
+            return NoContent();
         }
 
         // DELETE: api/v1/task/1
         [HttpDelete("{id}")]
-        public void DeleteTask(long id)
+        public async Task<ActionResult> DeleteTask(long id)
         {
-            _taskService.DeleteTask(id);            
+            await _taskService.DeleteTask(id);
+            return NoContent();
         }
     }
 }

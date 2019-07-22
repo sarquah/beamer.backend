@@ -3,6 +3,7 @@ using ProjectManagementAPI.Interfaces;
 using ProjectManagementAPI.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 namespace ProjectManagementAPI.Services
 {
@@ -15,14 +16,14 @@ namespace ProjectManagementAPI.Services
             _userRepository = userRepository;
         }
 
-        public void CreateUser(User user)
+        public async Task CreateUser(User user)
         {
-            _userRepository.CreateUser(user);
+           await _userRepository.CreateUser(user);
         }
 
-        public void DeleteUser(long id)
+        public async Task DeleteUser(long id)
         {
-            _userRepository.DeleteUser(id);
+            await _userRepository.DeleteUser(id);
         }
 
         public async Task<User> GetUser(long id)
@@ -35,9 +36,9 @@ namespace ProjectManagementAPI.Services
             return await _userRepository.GetUsers();
         }
 
-        public void UpdateUser(long id, User user)
+        public async Task UpdateUser(long id, User user)
         {
-            _userRepository.UpdateUser(id, user);
+            await _userRepository.UpdateUser(id, user);
         }
     }
 }
