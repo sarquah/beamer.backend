@@ -15,29 +15,10 @@ namespace ProjectManagementAPI.Services
             _projectRepository = projectRepository;
         }
 
-        public async Task<bool> CreateProject(Project project)
-        {
-           return await _projectRepository.CreateProject(project);
-        }
-
-        public async Task<bool> DeleteProject(long id)
-        {
-            return await _projectRepository.DeleteProject(id);
-        }
-
-        public async Task<Project> GetProject(long id)
-        {
-            return await _projectRepository.GetProject(id);
-        }
-
-        public async Task<IEnumerable<Project>> GetProjects()
-        {
-            return await _projectRepository.GetProjects();
-        }
-
-        public async Task<bool> UpdateProject(long id, Project project)
-        {
-            return await _projectRepository.UpdateProject(id, project);
-        }
+        public async Task<bool> CreateProject(Project project) => await _projectRepository.CreateProject(project);
+        public async Task<bool> DeleteProject(long id) => await _projectRepository.DeleteProject(id);
+        public async Task<Project> GetProject(long id) => await _projectRepository.GetProject(id);
+        public async Task<IEnumerable<Project>> GetProjects() => await _projectRepository.GetProjects();
+        public async Task<bool> UpdateProject(long id, Project project) => await _projectRepository.UpdateProject(id, project);
     }
 }

@@ -15,29 +15,10 @@ namespace ProjectManagementAPI.Services
             _userRepository = userRepository;
         }
 
-        public async Task<bool> CreateUser(User user)
-        {
-            return await _userRepository.CreateUser(user);
-        }
-
-        public async Task<bool> DeleteUser(long id)
-        {
-            return await _userRepository.DeleteUser(id);
-        }
-
-        public async Task<User> GetUser(long id)
-        {
-            return await _userRepository.GetUser(id);
-        }
-
-        public async Task<IEnumerable<User>> GetUsers()
-        {
-            return await _userRepository.GetUsers();
-        }
-
-        public async Task<bool> UpdateUser(long id, User user)
-        {
-            return await _userRepository.UpdateUser(id, user);
-        }
+        public async Task<bool> CreateUser(User user) => await _userRepository.CreateUser(user);
+        public async Task<bool> DeleteUser(long id) => await _userRepository.DeleteUser(id);
+        public async Task<User> GetUser(long id) => await _userRepository.GetUser(id);
+        public async Task<IEnumerable<User>> GetUsers() => await _userRepository.GetUsers();
+        public async Task<bool> UpdateUser(long id, User user) => await _userRepository.UpdateUser(id, user);
     }
 }

@@ -35,10 +35,7 @@ namespace ProjectManagementAPI.Persistance.Repositories
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
-        {
-            return await _context.Users.ToListAsync();
-        }
+        public async Task<IEnumerable<User>> GetUsers() => await _context.Users.ToListAsync();
 
         public async Task<bool> UpdateUser(long id, User user)
         {
