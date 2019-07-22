@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProjectManagementAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Controllers
 {
@@ -10,71 +9,49 @@ namespace ProjectManagementAPI.Controllers
     [ApiController]
     public class ProjectController : ControllerBase
     {
-        private readonly ProjectManagementContext _context;
+        private readonly IProjectService _projectService;
 
-        public ProjectController(ProjectManagementContext context)
+        public ProjectController(IProjectService projectService)
         {
-            _context = context;
+            _projectService = projectService;
         }
 
         // GET: api/v1/project/projects
         [HttpGet("projects")]
         public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
         {
-            return await _context.Projects
-                .Include(p => p.Tasks)
-                .Include(p => p.Owner)
-                .ToListAsync();
+            var projects = await _projectService.GetProjects();
+            return Ok(projects);
         }
 
         // GET: api/v1/project/1
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> GetProject(long id)
         {
-            var project = await _context.Projects
-                .Include(p => p.Tasks)
-                .Include(p => p.Owner)
-                .FirstOrDefaultAsync(p => p.Id == id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-            return project;
+            return await _projectService.GetProject(id);                
         }
 
         // POST: api/v1/project
         [HttpPost]
-        public async Task<ActionResult<Project>> CreateProject(Project project)
+        public async Task<ActionResult> CreateProject(Project project)
         {
-            _context.Projects.Add(project);
-            await _context.SaveChangesAsync();
+            await _projectService.CreateProject(project);
             return CreatedAtAction(nameof(GetProject), new { id = project.Id }, project);
         }
 
         // PUT: api/v1/project/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProject(long id, Project project)
+        public async Task<ActionResult> UpdateProject(long id, Project project)
         {
-            if (id != project.Id)
-            {
-                return BadRequest();
-            }
-            _context.Entry(project).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _projectService.UpdateProject(id, project);
             return NoContent();
         }
 
         // DELETE: api/v1/project/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(long id)
+        public async Task<ActionResult> DeleteProject(long id)
         {
-            var project = await _context.Projects.FindAsync(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-            _context.Projects.Remove(project);
-            await _context.SaveChangesAsync();
+            await _projectService.DeleteProject(id);
             return NoContent();
         }
     }

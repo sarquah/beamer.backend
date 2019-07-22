@@ -4,38 +4,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectManagementAPI.Models;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ProjectManagementAPI.Controllers;
+using ProjectManagementAPI.Domain.Repositories;
+using ProjectManagementAPI.Interfaces;
+using ProjectManagementAPI.Models;
+using ProjectManagementAPI.Persistance.Repositories;
+using ProjectManagementAPI.Services;
 
 namespace ProjectManagementAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _loggerFactory;
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        {
+            _configuration = configuration;
+            _loggerFactory = loggerFactory;
+        }        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = @"Server=(localdb)\mssqllocaldb;Database=ProjectManagement;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<ProjectManagementContext>(options => options.UseSqlServer(connection));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                // Remove reference loop when returning data
+                .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            //Add dependencies
+            services.AddScoped<IProjectRepository, ProjectRepository>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            var logger = _loggerFactory.CreateLogger<Startup>();
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
@@ -44,6 +57,7 @@ namespace ProjectManagementAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                logger.LogInformation("Running in development environment...");
             }
 
             app.UseMvc();

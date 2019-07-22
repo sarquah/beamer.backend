@@ -10,8 +10,8 @@ using ProjectManagementAPI.Models;
 namespace ProjectManagementAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190718193950_Users")]
-    partial class Users
+    [Migration("20190719084838_Status")]
+    partial class Status
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("Status");
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -64,7 +64,7 @@ namespace ProjectManagementAPI.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("Status");
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 

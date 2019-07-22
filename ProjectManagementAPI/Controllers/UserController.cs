@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProjectManagementAPI.Interfaces;
 using ProjectManagementAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectManagementAPI.Controllers
 {
@@ -10,65 +10,49 @@ namespace ProjectManagementAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ProjectManagementContext _context;
+        private readonly IUserService _userService;
 
-        public UserController(ProjectManagementContext context)
+        public UserController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         // GET: api/v1/user/users
         [HttpGet("users")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var users = await _userService.GetUsers();
+            return Ok(users);
         }
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return user;
+            return await _userService.GetUser(id);
         }
 
         // POST: api/v1/user
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
+        public async Task<ActionResult> CreateUser(User user)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            await _userService.CreateUser(user);
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
         // PUT: api/v1/user/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(long id, User user)
+        public async Task<ActionResult> UpdateUser(long id, User user)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-            _context.Entry(user).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            await _userService.UpdateUser(id, user);
             return NoContent();
         }
 
         // DELETE: api/v1/user/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(long id)
+        public async Task<ActionResult> DeleteUser(long id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
+            await _userService.DeleteUser(id);
             return NoContent();
         }
     }
