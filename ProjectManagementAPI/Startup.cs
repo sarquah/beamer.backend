@@ -6,14 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using ProjectManagementAPI.Controllers;
-using ProjectManagementAPI.Domain.Repositories;
-using ProjectManagementAPI.Interfaces;
-using ProjectManagementAPI.Models;
-using ProjectManagementAPI.Persistance.Repositories;
-using ProjectManagementAPI.Services;
+using ProjectManagement.Domain.Repositories;
+using ProjectManagement.Domain.Services;
+using ProjectManagement.Infrastructure.Persistance.Contexts;
+using ProjectManagement.Infrastructure.Persistance.Repositories;
+using ProjectManagement.Infrastructure.Services;
 
-namespace ProjectManagementAPI
+namespace ProjectManagement.API
 {
     public class Startup
     {
