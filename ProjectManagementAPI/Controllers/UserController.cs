@@ -19,7 +19,7 @@ namespace ProjectManagement.API.Controllers
 
         // GET: api/v1/user/users
         [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             var users = await _userService.GetUsers();
             return Ok(users);
@@ -27,7 +27,7 @@ namespace ProjectManagement.API.Controllers
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<UserDetailsDTO>> GetUser(long id)
         {
             var user = await _userService.GetUser(id);
             if (user == null)

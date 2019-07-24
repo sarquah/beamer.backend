@@ -30,13 +30,16 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             return true;
         }
 
-        public async Task<User> GetUser(long id)
+        public async Task<UserDetailsDTO> GetUser(long id)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers() => await _context.Users.ToListAsync();
+        public async Task<IEnumerable<UserDTO>> GetUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
 
         public async Task<bool> UpdateUser(long id, User user)
         {
