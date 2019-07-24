@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.Services;
 using System.Collections.Generic;
@@ -11,30 +12,34 @@ namespace ProjectManagement.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         // GET: api/v1/user/users
         [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
         {
             var users = await _userService.GetUsers();
-            return Ok(users);
+            var usersDTO = _mapper.Map<ICollection<UserDTO>>(users);
+            return Ok(usersDTO);
         }
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<UserDetailsDTO>> GetUser(long id)
         {
             var user = await _userService.GetUser(id);
             if (user == null)
             {
                 return NotFound();
             }
-            return user;
+            var userDetailsDTO = _mapper.Map<UserDetailsDTO>(user);
+            return userDetailsDTO;
         }
 
         // POST: api/v1/user
