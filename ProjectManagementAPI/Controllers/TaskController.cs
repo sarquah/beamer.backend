@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,30 +12,34 @@ namespace ProjectManagement.API.Controllers
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
+        private readonly IMapper _mapper;
 
-        public TaskController(ITaskService taskService)
+        public TaskController(ITaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
         }
 
         // GET: api/v1/task/tasks
         [HttpGet("tasks")]
-        public async Task<ActionResult<IEnumerable<Domain.Models.Task>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
         {
             var tasks = await _taskService.GetTasks();
-            return Ok(tasks);
+            var tasksDTO = _mapper.Map<ICollection<TaskDTO>>(tasks);
+            return Ok(tasksDTO);
         }
 
         // GET: api/v1/task/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Domain.Models.Task>> GetTask(long id)
+        public async Task<ActionResult<TaskDetailsDTO>> GetTask(long id)
         {
             var task = await _taskService.GetTask(id);
             if (task == null)
             {
                 return NotFound();
             }
-            return task;
+            var taskDetailsDTO = _mapper.Map<TaskDetailsDTO>(task);
+            return taskDetailsDTO;
         }
 
         // POST: api/v1/task

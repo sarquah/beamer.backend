@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.Services;
 using System.Collections.Generic;
@@ -11,30 +12,34 @@ namespace ProjectManagement.API.Controllers
     public class ProjectController : ControllerBase
     {
         private readonly IProjectService _projectService;
+        private readonly IMapper _mapper;
 
-        public ProjectController(IProjectService projectService)
+        public ProjectController(IProjectService projectService, IMapper mapper)
         {
             _projectService = projectService;
+            _mapper = mapper;
         }
 
         // GET: api/v1/project/projects
         [HttpGet("projects")]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectDTO>>> GetProjects()
         {
             var projects = await _projectService.GetProjects();
-            return Ok(projects);
+            var projectsDTO = _mapper.Map<ICollection<ProjectDTO>>(projects);
+            return Ok(projectsDTO);
         }
 
         // GET: api/v1/project/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(long id)
+        public async Task<ActionResult<ProjectDetailsDTO>> GetProject(long id)
         {
             var project = await _projectService.GetProject(id);
             if (project == null)
             {
                 return NotFound();
             }
-            return project;
+            var projectDetailsDTO = _mapper.Map<ProjectDetailsDTO>(project);
+            return projectDetailsDTO;
         }
 
         // POST: api/v1/project

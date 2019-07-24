@@ -2,7 +2,7 @@
 
 namespace ProjectManagement.Domain.Models
 {
-    class ActivityDetailsDTO
+    public class ActivityDetailsDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }

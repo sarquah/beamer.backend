@@ -1,6 +1,6 @@
 ﻿namespace ProjectManagement.Domain.Models
 {
-    class ActivityDTO
+    public class ActivityDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
