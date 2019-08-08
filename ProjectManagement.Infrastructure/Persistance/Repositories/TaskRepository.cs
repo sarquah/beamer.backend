@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManagement.Domain.Repositories;
 using ProjectManagement.Infrastructure.Persistance.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,11 +11,18 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
     {
         public TaskRepository(AppDbContext context) : base(context) { }
 
-        public async Task<bool> CreateTask(ProjectManagement.Domain.Models.Task task)
+        public async Task<bool> CreateTask(Domain.Models.Task task)
         {
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Tasks.Add(task);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<bool> DeleteTask(long id)
@@ -24,12 +32,19 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             {
                 return false;
             }
-            _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
-        public async Task<ProjectManagement.Domain.Models.Task> GetTask(long id)
+        public async Task<Domain.Models.Task> GetTask(long id)
         {
             var task = await _context.Tasks
                 .Include(t => t.Owner)
@@ -39,7 +54,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             return task;
         }
 
-        public async Task<IEnumerable<ProjectManagement.Domain.Models.Task>> GetTasks()
+        public async Task<IEnumerable<Domain.Models.Task>> GetTasks()
         {
             return await _context.Tasks
                 .Include(t => t.Owner)
@@ -48,16 +63,23 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
                 .ToListAsync();
         }
 
-        public async Task<bool> UpdateTask(long id, ProjectManagement.Domain.Models.Task task)
+        public async Task<bool> UpdateTask(long id, Domain.Models.Task task)
         {
             var foundTask = await _context.Tasks.FindAsync(id);
             if (foundTask == null)
             {
                 return false;
             }
-            _context.Entry(task).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Entry(task).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

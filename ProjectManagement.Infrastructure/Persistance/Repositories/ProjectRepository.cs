@@ -2,6 +2,7 @@
 using ProjectManagement.Domain.Models;
 using ProjectManagement.Domain.Repositories;
 using ProjectManagement.Infrastructure.Persistance.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,9 +14,16 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
 
         public async Task<bool> CreateProject(Project project)
         {
-            _context.Projects.Add(project);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Projects.Add(project);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<bool> DeleteProject(long id)
@@ -25,9 +33,16 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             {
                 return false;
             }
-            _context.Projects.Remove(project);
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Projects.Remove(project);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<Project> GetProject(long id)
@@ -54,9 +69,16 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             {
                 return false;
             }
-            _context.Entry(project).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return true;
+            try
+            {
+                _context.Entry(project).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
     }
 }
