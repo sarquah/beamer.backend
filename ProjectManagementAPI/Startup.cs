@@ -29,6 +29,7 @@ namespace ProjectManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             var connection = @"Server=(localdb)\mssqllocaldb;Database=ProjectManagement;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -60,8 +61,9 @@ namespace ProjectManagement.API
                 app.UseDeveloperExceptionPage();
                 logger.LogInformation("Running in development environment...");
             }
-
-            app.UseMvc();
+            app.UseCors(builder => 
+                builder.WithOrigins("http://localhost:3000"));
+            app.UseMvc();            
         }
     }
 }
