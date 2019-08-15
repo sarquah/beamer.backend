@@ -62,7 +62,7 @@ namespace ProjectManagement.API
                 logger.LogInformation("Running in development environment...");
             }
             app.UseCors(builder => 
-                builder.WithOrigins("http://localhost:3000"));
+                builder.WithOrigins("http://localhost:3000", "http://localhost:9009"));
             app.UseMvc();            
         }
     }
