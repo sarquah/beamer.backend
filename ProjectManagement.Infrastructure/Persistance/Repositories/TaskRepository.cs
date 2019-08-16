@@ -47,6 +47,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
         public async Task<Domain.Models.Task> GetTask(long id)
         {
             var task = await _context.Tasks
+                .AsNoTracking()
                 .Include(t => t.Owner)
                 .Include(t => t.Project)
                     .ThenInclude(t => t.Owner)
@@ -57,6 +58,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
         public async Task<IEnumerable<Domain.Models.Task>> GetTasks()
         {
             return await _context.Tasks
+                .AsNoTracking()
                 .Include(t => t.Owner)
                 .Include(t => t.Project)
                     .ThenInclude(t => t.Owner)
@@ -65,7 +67,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
 
         public async Task<bool> UpdateTask(long id, Domain.Models.Task task)
         {
-            var foundTask = await _context.Tasks.FindAsync(id);
+            var foundTask = await _context.Tasks.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
             if (foundTask == null)
             {
                 return false;

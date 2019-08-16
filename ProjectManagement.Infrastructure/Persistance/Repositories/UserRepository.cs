@@ -47,18 +47,20 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
 
         public async Task<User> GetUser(long id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> UpdateUser(long id, User user)
         {
-            var foundUser = await _context.Users.FindAsync(id);
+            var foundUser = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
             if (foundUser == null)
             {
                 return false;
