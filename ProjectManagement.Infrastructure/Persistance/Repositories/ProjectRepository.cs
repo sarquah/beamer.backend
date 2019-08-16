@@ -28,7 +28,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
 
         public async Task<bool> DeleteProject(long id)
         {
-            var project = _context.Projects.Find(id);
+            var project = await _context.Projects.FindAsync(id);
             if (project == null)
             {
                 return false;
@@ -48,8 +48,9 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
         public async Task<Project> GetProject(long id)
         {
             var project = await _context.Projects
+                .AsNoTracking()
                 .Include(p => p.Tasks)
-                .Include(p => p.Owner)
+                .Include(p => p.Owner)                
                 .FirstOrDefaultAsync(p => p.Id == id);
             return project;
         }
@@ -57,14 +58,15 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
         public async Task<IEnumerable<Project>> GetProjects()
         {
             return await _context.Projects
+                .AsNoTracking()
                 .Include(p => p.Tasks)
-                .Include(p => p.Owner)
+                .Include(p => p.Owner)                
                 .ToListAsync();
         }
 
         public async Task<bool> UpdateProject(long id, Project project)
         {
-            var foundProject = await _context.Projects.FindAsync(id);
+            var foundProject = await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
             if (foundProject == null)
             {
                 return false;
