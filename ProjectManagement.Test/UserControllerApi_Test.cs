@@ -16,11 +16,11 @@ using Task = System.Threading.Tasks.Task;
 namespace ProjectManagement.IntegrationTests
 {
     [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
-    public class TaskControllerApi_Test
+    public class UserControllerApi_Test
     {
         private readonly HttpClient _client;
 
-        public TaskControllerApi_Test()
+        public UserControllerApi_Test()
         {
             var server = new TestServer(new WebHostBuilder()
                 .UseEnvironment("Development")
@@ -30,10 +30,10 @@ namespace ProjectManagement.IntegrationTests
 
         [Theory, Priority(2)]
         [InlineData("GET")]
-        public async Task GetTasksTest(string method)
+        public async Task GetUsersTest(string method)
         {
             // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), "/api/v1/task/tasks");
+            var request = new HttpRequestMessage(new HttpMethod(method), "/api/v1/user/users");
             // Act
             var response = await _client.SendAsync(request);
             // Assert
@@ -42,10 +42,10 @@ namespace ProjectManagement.IntegrationTests
         }
 
         [Theory, Priority(2), InlineData("GET", 6)]
-        public async Task GetTaskTest(string method, int? id = null)
+        public async Task GetUserTest(string method, int? id = null)
         {
             // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), $"/api/v1/task/{id}");
+            var request = new HttpRequestMessage(new HttpMethod(method), $"/api/v1/user/{id}");
             // Act
             var response = await _client.SendAsync(request);
             // Assert
@@ -54,54 +54,50 @@ namespace ProjectManagement.IntegrationTests
         }
 
         [Fact, Priority(0)]
-        public async Task CreateTaskTest()
+        public async Task CreateUserTest()
         {
             // Arrange
-            var task = new StringContent(JsonConvert.SerializeObject(new ProjectManagement.Domain.Models.Task()
+            var user = new StringContent(JsonConvert.SerializeObject(new User()
             {
-                Name = "Test Integration Task",
-                StartDate = new DateTime(2019, 8, 8),
-                EndDate = new DateTime(2019, 8, 12),
-                Description = "This is an integration task test",
-                Status = EStatus.NotStarted
+                Name = "Test Integration User",
+                Department = "Test Department",
+                Role = "Tester"
             }), Encoding.UTF8, "application/json");
             // Act
-            var response = await _client.PostAsync($"/api/v1/task", task);
+            var response = await _client.PostAsync($"/api/v1/user", user);
             // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
         [Theory, Priority(1), InlineData(6)]
-        public async Task UpdateTaskTest(long id)
+        public async Task UpdateUserTest(long id)
         {
             // Arrange
-            var task = new StringContent(JsonConvert.SerializeObject(new ProjectManagement.Domain.Models.Task()
+            var user = new StringContent(JsonConvert.SerializeObject(new User()
             {
                 Id = id,
-                Name = "Test Integration Task 2",
-                StartDate = new DateTime(2019, 8, 8),
-                EndDate = new DateTime(2019, 8, 20),
-                Description = "This is an integration task test update",
-                Status = EStatus.NotStarted
+                Name = "Test Integration User 2",
+                Department = "Test Department",
+                Role = "Tester"
             }), Encoding.UTF8, "application/json");
             // Act
-            var response = await _client.PutAsync($"/api/v1/task/{id}", task);
+            var response = await _client.PutAsync($"/api/v1/user/{id}", user);
             // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
         [Fact, Priority(3)]
-        public async Task DeleteTaskTest()
+        public async Task DeleteUserTest()
         {
             // Arrange
-            var requestGet = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/task/tasks");
+            var requestGet = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/user/users");
             var responseGet = await _client.SendAsync(requestGet);
-            var tasksJson = await responseGet.Content.ReadAsStringAsync();
-            var tasks = JsonConvert.DeserializeObject<List<ProjectManagement.Domain.Models.Task>>(tasksJson);
+            var usersJson = await responseGet.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<List<User>>(usersJson);
             // Act
-            var response = await _client.DeleteAsync($"/api/v1/task/{tasks.Last().Id}");
+            var response = await _client.DeleteAsync($"/api/v1/user/{users.Last().Id}");
             // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
