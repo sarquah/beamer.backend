@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,9 +31,10 @@ namespace ProjectManagement.API
             services.AddCors();
             var connection = @"Server=(localdb)\mssqllocaldb;Database=ProjectManagement;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                // TODO Fix this
                 // Remove reference loop when returning data
-                .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                //.AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
             services.AddAutoMapper(typeof(Startup));
             //Add dependencies
@@ -47,7 +47,7 @@ namespace ProjectManagement.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             var logger = _loggerFactory.CreateLogger<Startup>();
             app.UseSwagger();
@@ -56,14 +56,13 @@ namespace ProjectManagement.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
             });
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                logger.LogInformation("Running in development environment...");
-            }
+            app.UseDeveloperExceptionPage();
+            logger.LogInformation("Running in development environment...");
             app.UseCors(builder => 
-                builder.WithOrigins("http://localhost:3000", "http://localhost:9009"));
-            app.UseMvc();            
+                builder.WithOrigins("http://localhost:3000", "http://localhost:9009", "http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            app.UseMvc();
         }
     }
 }
