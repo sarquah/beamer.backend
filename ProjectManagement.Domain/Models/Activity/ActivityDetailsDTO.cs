@@ -10,6 +10,7 @@ namespace ProjectManagement.Domain.Models
         public EStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public long OwnerId { get; set; }
         public string OwnerName { get; set; }
     }
 }
