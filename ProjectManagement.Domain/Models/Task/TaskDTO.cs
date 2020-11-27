@@ -2,6 +2,6 @@
 {
     public class TaskDTO : ActivityDTO
     {
-        public int ProjectId { get; set; }
+        public long? ProjectId { get; set; }
     }
 }
