@@ -50,7 +50,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
                 .AsNoTracking()
                 .Include(t => t.Owner)
                 .Include(t => t.Project)
-                    .ThenInclude(t => t.Owner)
+                    .ThenInclude(p => p.Owner)
                     .FirstOrDefaultAsync(t => t.Id == id);
             return task;
         }
@@ -61,7 +61,7 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
                 .AsNoTracking()
                 .Include(t => t.Owner)
                 .Include(t => t.Project)
-                    .ThenInclude(t => t.Owner)
+                    .ThenInclude(p => p.Owner)
                 .ToListAsync();
         }
 
