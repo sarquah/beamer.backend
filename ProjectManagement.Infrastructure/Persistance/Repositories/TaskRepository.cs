@@ -21,7 +21,8 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             }
             catch(Exception e)
             {
-                throw e;
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
@@ -40,7 +41,8 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             }
             catch(Exception e)
             {
-                throw e;
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
 
@@ -80,7 +82,8 @@ namespace ProjectManagement.Infrastructure.Persistance.Repositories
             }
             catch(Exception e)
             {
-                throw e;
+                Console.WriteLine(e.Message);
+                throw;
             }
         }
     }
