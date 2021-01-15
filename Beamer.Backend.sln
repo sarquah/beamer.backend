@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.API", "Beamer.API\Beamer.API.csproj", "{05DA9FB8-D82E-4031-93BB-9C3F682FB6D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Domain", "Beamer.Domain\Beamer.Domain.csproj", "{510F9CFA-19E5-4173-8B4A-0D5B8254146D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Infrastructure", "Beamer.Infrastructure\Beamer.Infrastructure.csproj", "{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.IntegrationTests", "Beamer.IntegrationTestS\Beamer.IntegrationTests.csproj", "{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6} = {CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Identity", "Beamer.Identity\Beamer.Identity.csproj", "{6692C942-389D-4C6C-84B8-CC59B8DE8D43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05DA9FB8-D82E-4031-93BB-9C3F682FB6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05DA9FB8-D82E-4031-93BB-9C3F682FB6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05DA9FB8-D82E-4031-93BB-9C3F682FB6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05DA9FB8-D82E-4031-93BB-9C3F682FB6D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{510F9CFA-19E5-4173-8B4A-0D5B8254146D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{510F9CFA-19E5-4173-8B4A-0D5B8254146D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{510F9CFA-19E5-4173-8B4A-0D5B8254146D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{510F9CFA-19E5-4173-8B4A-0D5B8254146D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6692C942-389D-4C6C-84B8-CC59B8DE8D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6692C942-389D-4C6C-84B8-CC59B8DE8D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6692C942-389D-4C6C-84B8-CC59B8DE8D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6692C942-389D-4C6C-84B8-CC59B8DE8D43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AD16B553-23AA-4612-9D02-72B54542FA74}
+	EndGlobalSection
+EndGlobal
