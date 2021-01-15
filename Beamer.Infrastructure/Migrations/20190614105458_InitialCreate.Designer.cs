@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Beamer.Infrastructure.Persistance.Contexts;
 
-namespace ProjectManagementAPI.Migrations
+namespace Beamer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20190614105458_InitialCreate")]

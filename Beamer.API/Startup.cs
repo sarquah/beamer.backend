@@ -29,7 +29,7 @@ namespace Beamer.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ProjectManagement;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Beamer;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
             services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
                 // TODO Fix this

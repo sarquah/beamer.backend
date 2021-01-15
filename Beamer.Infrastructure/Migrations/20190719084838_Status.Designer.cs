@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Beamer.Infrastructure.Persistance.Contexts;
 using System;
 
-namespace ProjectManagementAPI.Migrations
+namespace Beamer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20190719084838_Status")]

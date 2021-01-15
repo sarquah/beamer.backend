@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ProjectManagementAPI.Migrations
+namespace Beamer.Migrations
 {
     public partial class InitialCreate : Migration
     {
