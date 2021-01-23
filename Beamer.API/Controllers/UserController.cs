@@ -4,11 +4,13 @@ using Beamer.Domain.Models;
 using Beamer.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Beamer.API.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;

@@ -4,11 +4,13 @@ using Beamer.Domain.Models;
 using Beamer.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Beamer.API.Controllers
 {
     [Route("api/v1/task")]
     [ApiController]
+    [Authorize]
     public class TaskController : ControllerBase
     {
         private readonly ITaskService _taskService;
@@ -20,7 +22,7 @@ namespace Beamer.API.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/v1/task/tasks
+        // GET: api/v1/task/tasks        
         [HttpGet("tasks")]
         public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
         {

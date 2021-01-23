@@ -12,14 +12,17 @@ namespace Beamer.Identity.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _applicationDbContext;
         private static bool _databaseChecked;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext applicationDbContext)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _applicationDbContext = applicationDbContext;
         }
 
@@ -45,7 +48,30 @@ namespace Beamer.Identity.Controllers
             return BadRequest(ModelState);
         }
 
-        #region Helpers
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            EnsureDatabaseCreated(_applicationDbContext);
+            if (ModelState.IsValid)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }                
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return BadRequest(ModelState);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest();
+        }
 
         // The following code creates the database and schema if they don't exist.
         // This is a temporary workaround since deploying database through EF migrations is
@@ -68,7 +94,5 @@ namespace Beamer.Identity.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
-        #endregion
     }
 }
