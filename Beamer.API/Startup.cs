@@ -32,8 +32,7 @@ namespace Beamer.API
 		{
 			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddMicrosoftIdentityWebApi(_configuration, "AzureActiveDirectory");
 			services.AddCors();
-			var connection = @"Server=(localdb)\mssqllocaldb;Database=Beamer;Trusted_Connection=True;ConnectRetryCount=0";
-			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("BeamerDB")));
 			services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 			services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Beamer API", Version = "v1" }));
 			services.AddAutoMapper(typeof(Startup));
