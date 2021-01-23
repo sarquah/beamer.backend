@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Beamer.Identity.Models;
 using static OpenIddict.Abstractions.OpenIddictConstants;
+using Microsoft.IdentityModel.Tokens;
+using System;
 
 namespace Beamer.Identity
 {
@@ -69,23 +71,37 @@ namespace Beamer.Identity
                 // Register the OpenIddict server components.
                 .AddServer(options =>
                 {
-                    // Enable the token endpoint.
-                    options.SetTokenEndpointUris("/connect/token");
+                    // Enable the authorization, logout, userinfo, and introspection endpoints.
+                    options.SetAuthorizationEndpointUris("/connect/authorize")
+                           .SetLogoutEndpointUris("/connect/logout")
+                           .SetIntrospectionEndpointUris("/connect/introspect")
+                           .SetUserinfoEndpointUris("/connect/userinfo");
 
-                    // Enable the password and the refresh token flows.
-                    options.AllowPasswordFlow()
-                           .AllowRefreshTokenFlow();
+                    // Mark the "email", "profile" and "roles" scopes as supported scopes.
+                    options.RegisterScopes(Scopes.Email, Scopes.Profile, Scopes.Roles);
 
-                    // Accept anonymous clients (i.e clients that don't send a client_id).
-                    options.AcceptAnonymousClients();
+                    // Note: the sample only uses the implicit flow but you can enable the other
+                    // flows if you need to support code, password or client credentials.
+                    options.AllowImplicitFlow();
 
-                    // Register the signing and encryption credentials.
-                    options.AddDevelopmentEncryptionCertificate()
-                           .AddDevelopmentSigningCertificate();
+                    // Register the encryption credentials. This sample uses a symmetric
+                    // encryption key that is shared between the server and the Api2 sample
+                    // (that performs local token validation instead of using introspection).
+                    //
+                    // Note: in a real world application, this encryption key should be
+                    // stored in a safe place (e.g in Azure KeyVault, stored as a secret).
+                    options.AddEncryptionKey(new SymmetricSecurityKey(
+                        Convert.FromBase64String("DRjd/GnduI3Efzen9V9BvbNUfc/VKgXltV7Kbk9sMkY=")));
+
+                    // Register the signing credentials.
+                    options.AddDevelopmentSigningCertificate();
 
                     // Register the ASP.NET Core host and configure the ASP.NET Core-specific options.
                     options.UseAspNetCore()
-                           .EnableTokenEndpointPassthrough();
+                           .EnableAuthorizationEndpointPassthrough()
+                           .EnableLogoutEndpointPassthrough()
+                           .EnableUserinfoEndpointPassthrough()
+                           .EnableStatusCodePagesIntegration();
                 })
 
                 // Register the OpenIddict validation components.
@@ -118,7 +134,7 @@ namespace Beamer.Identity
 			app.UseRouting();
             app.UseCors(builder =>
             {
-                builder.WithOrigins("https://localhost:44379");
+                builder.WithOrigins("https://localhost:44379", "http://localhost:4200");
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
             });
