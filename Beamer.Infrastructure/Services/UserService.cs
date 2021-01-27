@@ -16,6 +16,7 @@ namespace Beamer.Infrastructure.Services
         }
 
         public async Task<bool> CreateUser(User user) => await _userRepository.CreateUser(user);
+        public async Task<bool> CreateUsers(IEnumerable<User> users) => await _userRepository.CreateUsers(users);
         public async Task<bool> DeleteUser(long id) => await _userRepository.DeleteUser(id);
         public async Task<User> GetUser(long id) => await _userRepository.GetUser(id);
         public async Task<IEnumerable<User>> GetUsers() => await _userRepository.GetUsers();
