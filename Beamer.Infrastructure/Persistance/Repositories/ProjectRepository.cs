@@ -5,6 +5,7 @@ using Beamer.Infrastructure.Persistance.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Beamer.Infrastructure.Persistance.Repositories
 {
@@ -47,24 +48,25 @@ namespace Beamer.Infrastructure.Persistance.Repositories
             }
         }
 
-        public async Task<Project> GetProject(long id)
+        public async Task<Project> GetProject(long id, Guid tenantId)
         {
             var project = await _context.Projects
                 .AsNoTracking()
                 .Include(p => p.Tasks)
                     .ThenInclude(t => t.Owner)
                 .Include(p => p.Owner)            
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id && p.TenantId == tenantId);
             return project;
         }
 
-        public async Task<IEnumerable<Project>> GetProjects()
+        public async Task<IEnumerable<Project>> GetProjects(Guid tenantId)
         {
             return await _context.Projects
                 .AsNoTracking()
+                .Where(p => p.TenantId == tenantId)
                 .Include(p => p.Tasks)
                     .ThenInclude(t => t.Owner)
-                .Include(p => p.Owner)                
+                .Include(p => p.Owner)            
                 .ToListAsync();
         }
 

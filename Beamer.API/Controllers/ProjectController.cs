@@ -5,6 +5,7 @@ using Beamer.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Beamer.API.Controllers
 {
@@ -24,18 +25,18 @@ namespace Beamer.API.Controllers
 
         // GET: api/v1/project/projects
         [HttpGet("projects")]
-        public async Task<ActionResult<IEnumerable<ProjectDTO>>> GetProjects()
+        public async Task<ActionResult<IEnumerable<ProjectDTO>>> GetProjects(Guid tenantId)
         {
-            var projects = await _projectService.GetProjects();
-            var projectsDTO = _mapper.Map<ICollection<ProjectDTO>>(projects);
+            var projects = await _projectService.GetProjects(tenantId);
+            var projectsDTO = _mapper.Map<IEnumerable<ProjectDTO>>(projects);
             return Ok(projectsDTO);
         }
 
         // GET: api/v1/project/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProjectDetailsDTO>> GetProject(long id)
+        public async Task<ActionResult<ProjectDetailsDTO>> GetProject(long id, Guid tenantId)
         {
-            var project = await _projectService.GetProject(id);
+            var project = await _projectService.GetProject(id, tenantId);
             if (project == null)
             {
                 return NotFound();

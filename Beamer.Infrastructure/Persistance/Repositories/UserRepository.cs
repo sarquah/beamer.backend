@@ -69,17 +69,20 @@ namespace Beamer.Infrastructure.Persistance.Repositories
             }
         }
 
-        public async Task<User> GetUser(long id)
+        public async Task<User> GetUser(long id, Guid tenantId)
         {
             var user = await _context.Users
                 .AsNoTracking()
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.Id == id && u.TenantId == tenantId);
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<User>> GetUsers(Guid tenantId)
         {
-            return await _context.Users.AsNoTracking().ToListAsync();
+            return await _context.Users
+                .Where(u => u.TenantId == tenantId)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<bool> UpdateUser(long id, User user)
