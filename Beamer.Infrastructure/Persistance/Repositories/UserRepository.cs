@@ -5,6 +5,7 @@ using Beamer.Infrastructure.Persistance.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Beamer.Infrastructure.Persistance.Repositories
 {
@@ -14,6 +15,11 @@ namespace Beamer.Infrastructure.Persistance.Repositories
 
         public async Task<bool> CreateUser(User user)
         {
+            var userDB = _context.Users.Find(user.Id);
+            if (userDB == null)
+            {
+                return false;
+            }
             try
             {
                 _context.Users.Add(user);
@@ -21,6 +27,22 @@ namespace Beamer.Infrastructure.Persistance.Repositories
                 return true;
             }
             catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
+        public async Task<bool> CreateUsers(IEnumerable<User> users)
+        {            
+            var usersToDB = users.Except(_context.Users);
+            try
+            {
+                _context.Users.AddRange(usersToDB);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 throw;

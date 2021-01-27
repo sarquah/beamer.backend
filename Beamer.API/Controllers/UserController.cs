@@ -52,6 +52,14 @@ namespace Beamer.API.Controllers
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
 
+        // POST: api/v1/user/users
+        [HttpPost("users")]
+        public async Task<ActionResult> CreateUsers(IEnumerable<User> users)
+        {
+            bool success = await _userService.CreateUsers(users);
+            return CreatedAtAction(nameof(GetUsers), users);
+        }
+
         // PUT: api/v1/user/1
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateUser(long id, User user)
@@ -65,7 +73,7 @@ namespace Beamer.API.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok();
         }
 
         // DELETE: api/v1/user/1
@@ -77,7 +85,7 @@ namespace Beamer.API.Controllers
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok();
         }
     }
 }
