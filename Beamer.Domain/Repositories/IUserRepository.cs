@@ -1,4 +1,5 @@
 ﻿using Beamer.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,8 +7,8 @@ namespace Beamer.Domain.Repositories
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetUsers();
-        Task<User> GetUser(long id);
+        Task<IEnumerable<User>> GetUsers(Guid tenantId);
+        Task<User> GetUser(long id, Guid tenantId);
         Task<bool> CreateUser(User user);
         Task<bool> CreateUsers(IEnumerable<User> users);
         Task<bool> UpdateUser(long id, User user);

@@ -5,6 +5,7 @@ using Beamer.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace Beamer.API.Controllers
 {
@@ -24,18 +25,18 @@ namespace Beamer.API.Controllers
 
         // GET: api/v1/user/users
         [HttpGet("users")]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetUsers(Guid tenantId)
         {
-            var users = await _userService.GetUsers();
-            var usersDTO = _mapper.Map<ICollection<UserDTO>>(users);
+            var users = await _userService.GetUsers(tenantId);
+            var usersDTO = _mapper.Map<IEnumerable<UserDTO>>(users);
             return Ok(usersDTO);
         }
 
         // GET: api/v1/user/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDetailsDTO>> GetUser(long id)
+        public async Task<ActionResult<UserDetailsDTO>> GetUser(long id, Guid tenantId)
         {
-            var user = await _userService.GetUser(id);
+            var user = await _userService.GetUser(id, tenantId);
             if (user == null)
             {
                 return NotFound();
