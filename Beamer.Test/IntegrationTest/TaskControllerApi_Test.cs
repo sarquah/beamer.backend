@@ -12,10 +12,12 @@ using System.Text;
 using Xunit;
 using Xunit.Priority;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.EntityFrameworkCore;
+using Beamer.Infrastructure.Persistance.Contexts;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Beamer.IntegrationTests
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
     public class TaskControllerApi_Test
     {
         private readonly HttpClient _client;
@@ -24,11 +26,23 @@ namespace Beamer.IntegrationTests
         {
             var server = new TestServer(new WebHostBuilder()
                 .UseEnvironment("Development")
-                .UseStartup<Startup>());
+                .UseStartup<Startup>()
+                .ConfigureServices(services =>
+                {
+                    var descriptor = services.SingleOrDefault(
+                        d => d.ServiceType == typeof(DbContextOptions<AppDbContext>)
+                    );
+                    services.Remove(descriptor);
+                    services.AddDbContext<AppDbContext>(options =>
+                    {
+                        options.UseInMemoryDatabase("BeamerDB.Test");
+                    });
+                }
+                ));
             _client = server.CreateClient();
         }
 
-        [Theory, Priority(2)]
+        [Theory]
         [InlineData("GET")]
         public async Task GetTasksTest(string method)
         {
@@ -41,7 +55,8 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Theory, Priority(2), InlineData("GET", 6)]
+        [Theory]
+        [InlineData("GET", 6)]
         public async Task GetTaskTest(string method, int? id = null)
         {
             // Arrange
@@ -53,7 +68,7 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact, Priority(0)]
+        [Fact]
         public async Task CreateTaskTest()
         {
             // Arrange
@@ -72,7 +87,8 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
-        [Theory, Priority(1), InlineData(6)]
+        [Theory]
+        [InlineData(6)]
         public async Task UpdateTaskTest(long id)
         {
             // Arrange
@@ -92,7 +108,7 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
-        [Fact, Priority(3)]
+        [Fact]
         public async Task DeleteTaskTest()
         {
             // Arrange

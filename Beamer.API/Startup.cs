@@ -30,7 +30,8 @@ namespace Beamer.API
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddMicrosoftIdentityWebApi(_configuration, "AzureActiveDirectory");
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddMicrosoftIdentityWebApi(_configuration, "AzureActiveDirectory");
 			services.AddCors();
 			services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("BeamerDB")));
 			services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -55,7 +56,6 @@ namespace Beamer.API
 				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Beamer API V1");
 				c.RoutePrefix = string.Empty;
 			});
-			app.UseDeveloperExceptionPage();
 			logger.LogInformation("Running in development environment...");
 			app.UseCors(builder =>
 			{
