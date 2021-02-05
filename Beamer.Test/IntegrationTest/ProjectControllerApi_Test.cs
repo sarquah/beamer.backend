@@ -99,7 +99,6 @@ namespace Beamer.IntegrationTests
 
 		private async Task<Project> CreateTestProject()
 		{
-			// Create project
 			var tenantId = Guid.NewGuid();
 			var project = new Project()
 			{
@@ -112,6 +111,7 @@ namespace Beamer.IntegrationTests
 			};
 			var projectRequest = new StringContent(JsonConvert.SerializeObject(project), Encoding.UTF8, "application/json");
 			var response = await _client.PostAsync($"/api/v1/project", projectRequest);
+			response.EnsureSuccessStatusCode();
 			return JsonConvert.DeserializeObject<Project>(await response.Content.ReadAsStringAsync());
 		}
 	}
