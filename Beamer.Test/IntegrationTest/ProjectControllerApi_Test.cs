@@ -97,22 +97,5 @@ namespace Beamer.IntegrationTests
 			response.EnsureSuccessStatusCode();
 			Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
 		}
-
-		private async Task<Project> CreateTestProject()
-		{
-			var project = new Project()
-			{
-				Name = "Test Integration Project",
-				StartDate = new DateTime(2019, 8, 8),
-				EndDate = new DateTime(2019, 8, 12),
-				Description = "This is an integration test",
-				Status = EStatus.NotStarted,
-				TenantId = Guid.NewGuid()
-			};
-			var projectRequest = new StringContent(JsonConvert.SerializeObject(project), Encoding.UTF8, "application/json");
-			var response = await _client.PostAsync($"/api/v1/project", projectRequest);
-			response.EnsureSuccessStatusCode();
-			return JsonConvert.DeserializeObject<Project>(await response.Content.ReadAsStringAsync());
-		}
 	}
 }

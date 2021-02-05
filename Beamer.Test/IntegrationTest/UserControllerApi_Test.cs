@@ -114,21 +114,5 @@ namespace Beamer.IntegrationTests
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-
-        private async Task<User> CreateTestUser()
-        {
-            var user = new User()
-            {
-                Name = "Test Integration User",
-                Department = "Development",
-                Email = "Test@Test.com",
-                Role = "Tester",
-                TenantId = Guid.NewGuid()
-            };
-            var userRequest = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/v1/user", userRequest);
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
-        }
     }
 }

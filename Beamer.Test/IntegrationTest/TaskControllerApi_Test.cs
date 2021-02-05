@@ -92,22 +92,5 @@ namespace Beamer.IntegrationTests
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
-
-        private async Task<Domain.Models.Task> CreateTestTask()
-        {
-            var task = new Domain.Models.Task()
-            {
-                Name = "Test Integration Task",
-                StartDate = new DateTime(2019, 8, 8),
-                EndDate = new DateTime(2019, 8, 12),
-                Description = "This is an integration test",
-                Status = EStatus.NotStarted,
-                TenantId = Guid.NewGuid()
-            };
-            var taskRequest = new StringContent(JsonConvert.SerializeObject(task), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/v1/task", taskRequest);
-            response.EnsureSuccessStatusCode();
-            return JsonConvert.DeserializeObject< Domain.Models.Task> (await response.Content.ReadAsStringAsync());
-        }
     }
 }
