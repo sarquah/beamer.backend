@@ -1,4 +1,4 @@
-name: .NET Core
+name: beamer.backend CI
 
 on:
   push:
