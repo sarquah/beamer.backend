@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Domain", "Beamer.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Infrastructure", "Beamer.Infrastructure\Beamer.Infrastructure.csproj", "{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.Test", "Beamer.Test\Beamer.Test.csproj", "{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Beamer.IntegrationTest", "Beamer.IntegrationTest\Beamer.IntegrationTest.csproj", "{3CEA3A13-CF1F-44B7-BB2D-D73E7D0E7A90}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6} = {CC1D1D33-4DC4-4D3D-B0B2-E39AA3AF68A6}
 	EndProjectSection
