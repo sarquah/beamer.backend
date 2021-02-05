@@ -71,7 +71,8 @@ namespace Beamer.IntegrationTests
                 StartDate = new DateTime(2019, 8, 8),
                 EndDate = new DateTime(2019, 8, 20),
                 Description = "This is an integration task test update",
-                Status = EStatus.NotStarted
+                Status = EStatus.NotStarted,
+                TenantId = createdTask.TenantId
             }), Encoding.UTF8, "application/json");
             // Act
             var response = await _client.PutAsync($"/api/v1/task/{createdTask.Id}", task);
@@ -94,7 +95,6 @@ namespace Beamer.IntegrationTests
 
         private async Task<Domain.Models.Task> CreateTestTask()
         {
-            var tenantId = Guid.NewGuid();
             var task = new Domain.Models.Task()
             {
                 Name = "Test Integration Task",
@@ -102,7 +102,7 @@ namespace Beamer.IntegrationTests
                 EndDate = new DateTime(2019, 8, 12),
                 Description = "This is an integration test",
                 Status = EStatus.NotStarted,
-                TenantId = tenantId
+                TenantId = Guid.NewGuid()
             };
             var taskRequest = new StringContent(JsonConvert.SerializeObject(task), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync($"/api/v1/task", taskRequest);

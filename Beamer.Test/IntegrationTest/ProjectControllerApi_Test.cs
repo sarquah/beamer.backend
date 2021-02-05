@@ -76,7 +76,8 @@ namespace Beamer.IntegrationTests
 				StartDate = new DateTime(2019, 8, 8),
 				EndDate = new DateTime(2019, 8, 20),
 				Description = "This is an integration test update",
-				Status = EStatus.NotStarted
+				Status = EStatus.NotStarted,
+				TenantId = createdProject.TenantId
 			}), Encoding.UTF8, "application/json");
 			// Act
 			var response = await _client.PutAsync($"/api/v1/project/{createdProject.Id}", projectRequest);
@@ -99,7 +100,6 @@ namespace Beamer.IntegrationTests
 
 		private async Task<Project> CreateTestProject()
 		{
-			var tenantId = Guid.NewGuid();
 			var project = new Project()
 			{
 				Name = "Test Integration Project",
@@ -107,7 +107,7 @@ namespace Beamer.IntegrationTests
 				EndDate = new DateTime(2019, 8, 12),
 				Description = "This is an integration test",
 				Status = EStatus.NotStarted,
-				TenantId = tenantId
+				TenantId = Guid.NewGuid()
 			};
 			var projectRequest = new StringContent(JsonConvert.SerializeObject(project), Encoding.UTF8, "application/json");
 			var response = await _client.PostAsync($"/api/v1/project", projectRequest);

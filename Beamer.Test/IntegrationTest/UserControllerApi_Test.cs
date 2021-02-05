@@ -1,65 +1,26 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Newtonsoft.Json;
-using Beamer.API;
+﻿using Newtonsoft.Json;
 using Beamer.Domain.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using Xunit;
-using Xunit.Priority;
 using Task = System.Threading.Tasks.Task;
-using Microsoft.EntityFrameworkCore;
-using Beamer.Infrastructure.Persistance.Contexts;
-using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
+using System;
 
 namespace Beamer.IntegrationTests
 {
-    public class UserControllerApi_Test
+	public class UserControllerApi_Test : IntegrationTest
     {
-        private readonly HttpClient _client;
+        public UserControllerApi_Test() : base() { }
 
-        public UserControllerApi_Test()
-        {
-            var server = new TestServer(new WebHostBuilder()
-                .UseEnvironment("Development")
-                .UseStartup<Startup>()
-                .ConfigureServices(services =>
-                {
-                    var descriptor = services.SingleOrDefault(
-                        d => d.ServiceType == typeof(DbContextOptions<AppDbContext>)
-                    );
-                    services.Remove(descriptor);
-                    services.AddDbContext<AppDbContext>(options =>
-                    {
-                        options.UseInMemoryDatabase("BeamerDB.Test");
-                    });
-                }
-                ));
-            _client = server.CreateClient();
-        }
-
-        [Theory]
-        [InlineData("GET")]
-        public async Task GetUsersTest(string method)
+        [Fact]
+        public async Task Get_Users_Test()
         {
             // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), "/api/v1/user/users");
-            // Act
-            var response = await _client.SendAsync(request);
-            // Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        }
-
-        [Theory]
-        [InlineData("GET", 6)]
-        public async Task GetUserTest(string method, int? id = null)
-        {
-            // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), $"/api/v1/user/{id}");
+            var createdUser = await CreateTestUser();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/v1/user/users?tenantId={createdUser.TenantId}");
             // Act
             var response = await _client.SendAsync(request);
             // Assert
@@ -68,14 +29,29 @@ namespace Beamer.IntegrationTests
         }
 
         [Fact]
-        public async Task CreateUserTest()
+        public async Task Get_User_Test()
+        {
+            // Arrange
+            var createdUser = await CreateTestUser();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/v1/user/{createdUser.Id}?tenantId={createdUser.TenantId}");
+            // Act
+            var response = await _client.SendAsync(request);
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Create_User_Test()
         {
             // Arrange
             var user = new StringContent(JsonConvert.SerializeObject(new User()
             {
                 Name = "Test Integration User",
                 Department = "Test Department",
-                Role = "Tester"
+                Role = "Tester",
+                Email = "Test@Test.com",
+                TenantId = Guid.NewGuid()
             }), Encoding.UTF8, "application/json");
             // Act
             var response = await _client.PostAsync($"/api/v1/user", user);
@@ -84,38 +60,75 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
-        [Theory]
-        [InlineData(6)]
-        public async Task UpdateUserTest(long id)
+        [Fact]
+        public async Task Create_Users_Test()
         {
             // Arrange
-            var user = new StringContent(JsonConvert.SerializeObject(new User()
+            var user = new User()
             {
-                Id = id,
-                Name = "Test Integration User 2",
+                Name = "Test Integration User",
                 Department = "Test Department",
-                Role = "Tester"
-            }), Encoding.UTF8, "application/json");
+                Role = "Tester",
+                Email = "Test@Test.com",
+                TenantId = Guid.NewGuid()
+            };
+            var users = new List<User>();
+            users.Add(user);
+            var usersRequest = new StringContent(JsonConvert.SerializeObject(users), Encoding.UTF8, "application/json");
             // Act
-            var response = await _client.PutAsync($"/api/v1/user/{id}", user);
+            var response = await _client.PostAsync($"/api/v1/user/users", usersRequest);
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
         [Fact]
-        public async Task DeleteUserTest()
+        public async Task Update_User_Test()
         {
             // Arrange
-            var requestGet = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/user/users");
-            var responseGet = await _client.SendAsync(requestGet);
-            var usersJson = await responseGet.Content.ReadAsStringAsync();
-            var users = JsonConvert.DeserializeObject<List<User>>(usersJson);
+            var createdUser = await CreateTestUser();
+            var user = new StringContent(JsonConvert.SerializeObject(new User()
+            {
+                Id = createdUser.Id,
+                Name = "Test Integration User 2",
+                Department = "Test Department",
+                Role = "Tester",
+                Email = "Test@Test.com",
+                TenantId = createdUser.TenantId
+            }), Encoding.UTF8, "application/json");
             // Act
-            var response = await _client.DeleteAsync($"/api/v1/user/{users.Last().Id}");
+            var response = await _client.PutAsync($"/api/v1/user/{createdUser.Id}", user);
             // Assert
             response.EnsureSuccessStatusCode();
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task Delete_User_Test()
+        {
+            // Arrange
+            var createdUser = await CreateTestUser();
+            // Act
+            var response = await _client.DeleteAsync($"/api/v1/user/{createdUser.Id}");
+            // Assert
+            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        private async Task<User> CreateTestUser()
+        {
+            var user = new User()
+            {
+                Name = "Test Integration User",
+                Department = "Development",
+                Email = "Test@Test.com",
+                Role = "Tester",
+                TenantId = Guid.NewGuid()
+            };
+            var userRequest = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync($"/api/v1/user", userRequest);
+            response.EnsureSuccessStatusCode();
+            return JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
         }
     }
 }
