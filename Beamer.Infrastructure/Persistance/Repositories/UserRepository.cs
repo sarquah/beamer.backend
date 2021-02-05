@@ -16,7 +16,7 @@ namespace Beamer.Infrastructure.Persistance.Repositories
         public async Task<bool> CreateUser(User user)
         {
             var userDB = _context.Users.Find(user.Id);
-            if (userDB == null)
+            if (userDB != null)
             {
                 return false;
             }

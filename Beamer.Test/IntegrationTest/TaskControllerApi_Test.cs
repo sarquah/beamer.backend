@@ -1,39 +1,25 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Newtonsoft.Json;
-using Beamer.API;
+﻿using Newtonsoft.Json;
 using Beamer.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using Xunit;
-using Xunit.Priority;
 using Task = System.Threading.Tasks.Task;
+using System.Threading.Tasks;
 
 namespace Beamer.IntegrationTests
 {
-    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
-    public class TaskControllerApi_Test
+	public class TaskControllerApi_Test : IntegrationTest
     {
-        private readonly HttpClient _client;
+        public TaskControllerApi_Test() : base() { }
 
-        public TaskControllerApi_Test()
-        {
-            var server = new TestServer(new WebHostBuilder()
-                .UseEnvironment("Development")
-                .UseStartup<Startup>());
-            _client = server.CreateClient();
-        }
-
-        [Theory, Priority(2)]
-        [InlineData("GET")]
-        public async Task GetTasksTest(string method)
+        [Fact]
+        public async Task Get_Tasks_Test()
         {
             // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), "/api/v1/task/tasks");
+            var createdTask = await CreateTestTask();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/v1/task/tasks?tenantId={createdTask.TenantId}");
             // Act
             var response = await _client.SendAsync(request);
             // Assert
@@ -41,11 +27,12 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Theory, Priority(2), InlineData("GET", 6)]
-        public async Task GetTaskTest(string method, int? id = null)
+        [Fact]
+        public async Task Get_Task_Test()
         {
             // Arrange
-            var request = new HttpRequestMessage(new HttpMethod(method), $"/api/v1/task/{id}");
+            var createdTask = await CreateTestTask();
+            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/v1/task/{createdTask.Id}?tenantId={createdTask.TenantId}");
             // Act
             var response = await _client.SendAsync(request);
             // Assert
@@ -53,11 +40,11 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
-        [Fact, Priority(0)]
-        public async Task CreateTaskTest()
+        [Fact]
+        public async Task Create_Task_Test()
         {
             // Arrange
-            var task = new StringContent(JsonConvert.SerializeObject(new Beamer.Domain.Models.Task()
+            var task = new StringContent(JsonConvert.SerializeObject(new Domain.Models.Task()
             {
                 Name = "Test Integration Task",
                 StartDate = new DateTime(2019, 8, 8),
@@ -72,36 +59,35 @@ namespace Beamer.IntegrationTests
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
         }
 
-        [Theory, Priority(1), InlineData(6)]
-        public async Task UpdateTaskTest(long id)
+        [Fact]
+        public async Task Update_Task_Test()
         {
             // Arrange
-            var task = new StringContent(JsonConvert.SerializeObject(new Beamer.Domain.Models.Task()
+            var createdTask = await CreateTestTask();
+            var task = new StringContent(JsonConvert.SerializeObject(new Domain.Models.Task()
             {
-                Id = id,
+                Id = createdTask.Id,
                 Name = "Test Integration Task 2",
                 StartDate = new DateTime(2019, 8, 8),
                 EndDate = new DateTime(2019, 8, 20),
                 Description = "This is an integration task test update",
-                Status = EStatus.NotStarted
+                Status = EStatus.NotStarted,
+                TenantId = createdTask.TenantId
             }), Encoding.UTF8, "application/json");
             // Act
-            var response = await _client.PutAsync($"/api/v1/task/{id}", task);
+            var response = await _client.PutAsync($"/api/v1/task/{createdTask.Id}", task);
             // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
-        [Fact, Priority(3)]
-        public async Task DeleteTaskTest()
+        [Fact]
+        public async Task Delete_Task_Test()
         {
             // Arrange
-            var requestGet = new HttpRequestMessage(new HttpMethod("GET"), "/api/v1/task/tasks");
-            var responseGet = await _client.SendAsync(requestGet);
-            var tasksJson = await responseGet.Content.ReadAsStringAsync();
-            var tasks = JsonConvert.DeserializeObject<List<Beamer.Domain.Models.Task>>(tasksJson);
+            var createdTask = await CreateTestTask();           
             // Act
-            var response = await _client.DeleteAsync($"/api/v1/task/{tasks.Last().Id}");
+            var response = await _client.DeleteAsync($"/api/v1/task/{createdTask.Id}");
             // Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
