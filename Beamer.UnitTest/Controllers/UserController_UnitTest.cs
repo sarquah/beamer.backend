@@ -49,7 +49,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.GetUsers(tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<IEnumerable<UserDTO>>>(response);
+			Assert.IsType<ActionResult<IEnumerable<UserDTO>>>(response);
 		}
 
 		[Fact]
@@ -61,7 +61,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.GetUser(userId, tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<UserDetailsDTO>>(response);
+			Assert.IsType<ActionResult<UserDetailsDTO>>(response);
 		}
 
 		[Fact]
@@ -80,7 +80,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.CreateUser(user);
 			// Assert
-			Assert.IsAssignableFrom<CreatedAtActionResult>(response);
+			Assert.IsType<CreatedAtActionResult>(response);
 		}
 
 		[Fact]
@@ -103,7 +103,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.CreateUsers(users);
 			// Assert
-			Assert.IsAssignableFrom<CreatedAtActionResult>(response);
+			Assert.IsType<CreatedAtActionResult>(response);
 		}
 
 		[Fact]
@@ -122,7 +122,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.UpdateUser(user.Id, user);
 			// Assert
-			Assert.IsAssignableFrom<OkResult>(response);
+			Assert.IsType<OkResult>(response);
 		}
 
 		[Fact]
@@ -133,7 +133,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _userController.DeleteUser(userId);
 			// Assert
-			Assert.IsAssignableFrom<OkResult>(response);
+			Assert.IsType<OkResult>(response);
 		}
 	}
 }

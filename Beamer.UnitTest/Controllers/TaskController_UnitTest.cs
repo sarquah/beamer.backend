@@ -51,7 +51,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _taskController.GetTasks(tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<IEnumerable<TaskDTO>>>(response);
+			Assert.IsType<ActionResult<IEnumerable<TaskDTO>>>(response);
 		}
 
 		[Fact]
@@ -63,7 +63,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _taskController.GetTask(taskId, tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<TaskDetailsDTO>>(response);
+			Assert.IsType<ActionResult<TaskDetailsDTO>>(response);
 		}
 
 		[Fact]
@@ -86,7 +86,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _taskController.CreateTask(task);
 			// Assert
-			Assert.IsAssignableFrom<CreatedAtActionResult>(response);
+			Assert.IsType<CreatedAtActionResult>(response);
 		}
 
 		[Fact]
@@ -109,7 +109,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _taskController.UpdateTask(task.Id, task);
 			// Assert
-			Assert.IsAssignableFrom<NoContentResult>(response);
+			Assert.IsType<NoContentResult>(response);
 		}
 
 		[Fact]
@@ -120,7 +120,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _taskController.DeleteTask(taskId);
 			// Assert
-			Assert.IsAssignableFrom<NoContentResult>(response);
+			Assert.IsType<NoContentResult>(response);
 		}
 	}
 }

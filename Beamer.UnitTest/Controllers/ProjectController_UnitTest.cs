@@ -49,7 +49,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _projectController.GetProjects(tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<IEnumerable<ProjectDTO>>>(response);
+			Assert.IsType<ActionResult<IEnumerable<ProjectDTO>>>(response);
 		}
 
 		[Fact]
@@ -61,7 +61,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _projectController.GetProject(projectId, tenantId);
 			// Assert
-			Assert.IsAssignableFrom<ActionResult<ProjectDetailsDTO>>(response);
+			Assert.IsType<ActionResult<ProjectDetailsDTO>>(response);
 		}
 
 		[Fact]
@@ -82,7 +82,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _projectController.CreateProject(project);
 			// Assert
-			Assert.IsAssignableFrom<CreatedAtActionResult>(response);
+			Assert.IsType<CreatedAtActionResult>(response);
 		}
 
 		[Fact]
@@ -103,7 +103,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _projectController.UpdateProject(project.Id, project);
 			// Assert
-			Assert.IsAssignableFrom<NoContentResult>(response);
+			Assert.IsType<NoContentResult>(response);
 		}
 
 		[Fact]
@@ -114,7 +114,7 @@ namespace Beamer.UnitTest.Controllers
 			// Act
 			var response = await _projectController.DeleteProject(projectId);
 			// Assert
-			Assert.IsAssignableFrom<NoContentResult>(response);
+			Assert.IsType<NoContentResult>(response);
 		}
 	}
 }
