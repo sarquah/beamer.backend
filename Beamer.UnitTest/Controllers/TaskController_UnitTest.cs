@@ -10,11 +10,11 @@ using Xunit;
 
 namespace Beamer.UnitTest.Controllers
 {
-	public class TaskControllerApi_UnitTest
+	public class TaskController_UnitTest
 	{
 		private TaskController _taskController;
 
-		public TaskControllerApi_UnitTest()
+		public TaskController_UnitTest()
 		{
 			var task = new Domain.Models.Task()
 			{

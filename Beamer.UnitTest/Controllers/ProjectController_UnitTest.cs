@@ -10,11 +10,11 @@ using Xunit;
 
 namespace Beamer.UnitTest.Controllers
 {
-	public class ProjectControllerApi_UnitTest
+	public class ProjectController_UnitTest
 	{
 		private ProjectController _projectController;
 
-		public ProjectControllerApi_UnitTest()
+		public ProjectController_UnitTest()
 		{			
 			var project = new Project()
 			{

@@ -10,11 +10,11 @@ using Xunit;
 
 namespace Beamer.UnitTest.Controllers
 {
-	public class UserControllerApi_UnitTest
+	public class UserController_UnitTest
 	{
 		private UserController _userController;
 
-		public UserControllerApi_UnitTest()
+		public UserController_UnitTest()
 		{
 			var user = new User()
 			{
