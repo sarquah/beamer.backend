@@ -32,7 +32,6 @@ namespace Beamer.UnitTest.Controllers
 			{
 				task
 			};
-			tasks.Add(task);
 			var mockTaskService = new Mock<ITaskService>();
 			mockTaskService.Setup(service => service.GetTasks(It.IsAny<Guid>())).ReturnsAsync(tasks);
 			mockTaskService.Setup(service => service.GetTask(It.IsAny<long>(), It.IsAny<Guid>())).ReturnsAsync(task);

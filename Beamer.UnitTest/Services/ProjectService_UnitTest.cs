@@ -30,7 +30,6 @@ namespace Beamer.UnitTest.Services
 			{
 				_project
 			};
-			_projects.Add(_project);
 			var mockProjectRepository = new Mock<IProjectRepository>();
 			mockProjectRepository.Setup(repository => repository.GetProjects(It.IsAny<Guid>())).ReturnsAsync(_projects);
 			mockProjectRepository.Setup(repository => repository.GetProject(It.IsAny<long>(), It.IsAny<Guid>())).ReturnsAsync(_project);

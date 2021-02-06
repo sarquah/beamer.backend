@@ -29,7 +29,6 @@ namespace Beamer.UnitTest.Controllers
 			{
 				user
 			};
-			users.Add(user);
 			var mockUserService = new Mock<IUserService>();
 			mockUserService.Setup(service => service.GetUsers(It.IsAny<Guid>())).ReturnsAsync(users);
 			mockUserService.Setup(service => service.GetUser(It.IsAny<long>(), It.IsAny<Guid>())).ReturnsAsync(user);

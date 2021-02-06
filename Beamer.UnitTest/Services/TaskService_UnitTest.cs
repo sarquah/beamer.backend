@@ -35,7 +35,6 @@ namespace Beamer.UnitTest.Services
 			{
 				_task
 			};
-			_tasks.Add(_task);
 			var mockTaskRepository = new Mock<ITaskRepository>();
 			mockTaskRepository.Setup(repository => repository.GetTasks(It.IsAny<Guid>())).ReturnsAsync(_tasks);
 			mockTaskRepository.Setup(repository => repository.GetTask(It.IsAny<long>(), It.IsAny<Guid>())).ReturnsAsync(_task);

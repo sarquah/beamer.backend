@@ -30,7 +30,6 @@ namespace Beamer.UnitTest.Controllers
 			{ 
 				project 
 			};
-			projects.Add(project);
 			var mockProjectService = new Mock<IProjectService>();
 			mockProjectService.Setup(service => service.GetProjects(It.IsAny<Guid>())).ReturnsAsync(projects);
 			mockProjectService.Setup(service => service.GetProject(It.IsAny<long>(), It.IsAny<Guid>())).ReturnsAsync(project);
