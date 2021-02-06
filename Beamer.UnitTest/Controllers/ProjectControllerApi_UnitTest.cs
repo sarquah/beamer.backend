@@ -4,10 +4,9 @@ using Beamer.Domain.Models;
 using Beamer.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
+using System;
 using Xunit;
-using Task = System.Threading.Tasks.Task;
 
 namespace Beamer.UnitTest.Controllers
 {
@@ -43,7 +42,7 @@ namespace Beamer.UnitTest.Controllers
 		}
 
 		[Fact]
-		public async Task GetProjects_Returns_ActionResultOfProjects()
+		public async System.Threading.Tasks.Task GetProjects_Returns_ActionResultOfProjects()
 		{
 			// Arrange
 			var tenantId = Guid.NewGuid();
@@ -54,7 +53,7 @@ namespace Beamer.UnitTest.Controllers
 		}
 
 		[Fact]
-		public async Task GetProject_Returns_ActionResultOfProject()
+		public async System.Threading.Tasks.Task GetProject_Returns_ActionResultOfProject()
 		{
 			// Arrange
 			var tenantId = Guid.NewGuid();
@@ -66,7 +65,7 @@ namespace Beamer.UnitTest.Controllers
 		}
 
 		[Fact]
-		public async Task CreateProject_Returns_CreatedAtActionResult()
+		public async System.Threading.Tasks.Task CreateProject_Returns_CreatedAtActionResult()
 		{
 			// Arrange
 			var tenantId = Guid.NewGuid();
@@ -87,7 +86,7 @@ namespace Beamer.UnitTest.Controllers
 		}
 
 		[Fact]
-		public async Task UpdateProject_Returns_NoContentResult()
+		public async System.Threading.Tasks.Task UpdateProject_Returns_NoContentResult()
 		{
 			// Arrange
 			var tenantId = Guid.NewGuid();
@@ -108,7 +107,7 @@ namespace Beamer.UnitTest.Controllers
 		}
 
 		[Fact]
-		public async Task DeleteProject_Returns_NoContentResult()
+		public async System.Threading.Tasks.Task DeleteProject_Returns_NoContentResult()
 		{
 			// Arrange
 			var projectId = 1;

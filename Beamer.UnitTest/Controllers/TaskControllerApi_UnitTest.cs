@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Beamer.Domain.Models;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Beamer.Domain.Services;
-using Moq;
+﻿using AutoMapper;
 using Beamer.API.Controllers;
-using AutoMapper;
-using Xunit;
+using Beamer.Domain.Models;
+using Beamer.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
+using System.Collections.Generic;
+using System;
+using Xunit;
 
 namespace Beamer.UnitTest.Controllers
 {
