@@ -12,7 +12,7 @@ namespace Beamer.UnitTest.Controllers
 {
 	public class TaskController_UnitTest
 	{
-		private TaskController _taskController;
+		private TaskController sut;
 
 		public TaskController_UnitTest()
 		{
@@ -39,7 +39,7 @@ namespace Beamer.UnitTest.Controllers
 			mockTaskService.Setup(service => service.UpdateTask(It.IsAny<long>(), It.IsAny<Domain.Models.Task>())).ReturnsAsync(true);
 			mockTaskService.Setup(service => service.DeleteTask(It.IsAny<long>())).ReturnsAsync(true);
 			var mockMapper = new Mock<IMapper>();
-			_taskController = new TaskController(mockTaskService.Object, mockMapper.Object);
+			sut = new TaskController(mockTaskService.Object, mockMapper.Object);
 		}
 
 		[Fact]
@@ -48,7 +48,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var tenantId = Guid.NewGuid();
 			// Act
-			var response = await _taskController.GetTasks(tenantId);
+			var response = await sut.GetTasks(tenantId);
 			// Assert
 			Assert.IsType<ActionResult<IEnumerable<TaskDTO>>>(response);
 		}
@@ -60,7 +60,7 @@ namespace Beamer.UnitTest.Controllers
 			var tenantId = Guid.NewGuid();
 			var taskId = 1;
 			// Act
-			var response = await _taskController.GetTask(taskId, tenantId);
+			var response = await sut.GetTask(taskId, tenantId);
 			// Assert
 			Assert.IsType<ActionResult<TaskDetailsDTO>>(response);
 		}
@@ -83,7 +83,7 @@ namespace Beamer.UnitTest.Controllers
 				OwnerId = 1
 			};
 			// Act
-			var response = await _taskController.CreateTask(task);
+			var response = await sut.CreateTask(task);
 			// Assert
 			Assert.IsType<CreatedAtActionResult>(response);
 		}
@@ -106,7 +106,7 @@ namespace Beamer.UnitTest.Controllers
 				OwnerId = 1
 			};
 			// Act
-			var response = await _taskController.UpdateTask(task.Id, task);
+			var response = await sut.UpdateTask(task.Id, task);
 			// Assert
 			Assert.IsType<NoContentResult>(response);
 		}
@@ -117,7 +117,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var taskId = 1;
 			// Act
-			var response = await _taskController.DeleteTask(taskId);
+			var response = await sut.DeleteTask(taskId);
 			// Assert
 			Assert.IsType<NoContentResult>(response);
 		}

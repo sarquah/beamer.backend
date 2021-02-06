@@ -10,7 +10,7 @@ namespace Beamer.UnitTest.Services
 {
 	public class ProjectService_UnitTest
 	{
-		private ProjectService _projectService;
+		private ProjectService sut;
 		private Project _project;
 		private List<Project> _projects;
 
@@ -37,7 +37,7 @@ namespace Beamer.UnitTest.Services
 			mockProjectRepository.Setup(repository => repository.UpdateProject(It.IsAny<long>(), It.IsAny<Project>())).ReturnsAsync(true);
 			mockProjectRepository.Setup(repository => repository.DeleteProject(It.IsAny<long>())).ReturnsAsync(true);
 
-			_projectService = new ProjectService(mockProjectRepository.Object);
+			sut = new ProjectService(mockProjectRepository.Object);
 		}
 
 		[Fact]
@@ -47,7 +47,7 @@ namespace Beamer.UnitTest.Services
 			var tenantId = Guid.NewGuid();
 			var expectedResult = _projects;
 			// Act
-			var response = await _projectService.GetProjects(tenantId);
+			var response = await sut.GetProjects(tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -60,7 +60,7 @@ namespace Beamer.UnitTest.Services
 			var projectId = 1;
 			var expectedResult = _project;
 			// Act
-			var response = await _projectService.GetProject(projectId, tenantId);
+			var response = await sut.GetProject(projectId, tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -82,7 +82,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _projectService.CreateProject(project);
+			var response = await sut.CreateProject(project);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -104,7 +104,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _projectService.UpdateProject(project.Id, project);
+			var response = await sut.UpdateProject(project.Id, project);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -116,7 +116,7 @@ namespace Beamer.UnitTest.Services
 			var projectId = 1;
 			var expectedResult = true;
 			// Act
-			var response = await _projectService.DeleteProject(projectId);
+			var response = await sut.DeleteProject(projectId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}

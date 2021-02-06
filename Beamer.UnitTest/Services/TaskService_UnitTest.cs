@@ -13,7 +13,7 @@ namespace Beamer.UnitTest.Services
 {
 	public class TaskService_UnitTest
 	{
-		private TaskService _taskService;
+		private TaskService sut;
 		private Domain.Models.Task _task;
 		private List<Domain.Models.Task> _tasks;
 
@@ -41,7 +41,7 @@ namespace Beamer.UnitTest.Services
 			mockTaskRepository.Setup(repository => repository.CreateTask(It.IsAny<Domain.Models.Task>())).ReturnsAsync(true);
 			mockTaskRepository.Setup(repository => repository.UpdateTask(It.IsAny<long>(), It.IsAny<Domain.Models.Task>())).ReturnsAsync(true);
 			mockTaskRepository.Setup(repository => repository.DeleteTask(It.IsAny<long>())).ReturnsAsync(true);
-			_taskService = new TaskService(mockTaskRepository.Object);
+			sut = new TaskService(mockTaskRepository.Object);
 		}
 
 		[Fact]
@@ -51,7 +51,7 @@ namespace Beamer.UnitTest.Services
 			var tenantId = Guid.NewGuid();
 			var expectedResult = _tasks;
 			// Act
-			var response = await _taskService.GetTasks(tenantId);
+			var response = await sut.GetTasks(tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -64,7 +64,7 @@ namespace Beamer.UnitTest.Services
 			var expectedResult = _task;
 			var taskId = 1;
 			// Act
-			var response = await _taskService.GetTask(taskId, tenantId);
+			var response = await sut.GetTask(taskId, tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -88,7 +88,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _taskService.CreateTask(task);
+			var response = await sut.CreateTask(task);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -112,7 +112,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _taskService.UpdateTask(task.Id, task);
+			var response = await sut.UpdateTask(task.Id, task);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -124,7 +124,7 @@ namespace Beamer.UnitTest.Services
 			var taskId = 1;
 			var expectedResult = true;
 			// Act
-			var response = await _taskService.DeleteTask(taskId);
+			var response = await sut.DeleteTask(taskId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}

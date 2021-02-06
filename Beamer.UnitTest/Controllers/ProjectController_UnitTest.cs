@@ -12,7 +12,7 @@ namespace Beamer.UnitTest.Controllers
 {
 	public class ProjectController_UnitTest
 	{
-		private ProjectController _projectController;
+		private ProjectController sut;
 
 		public ProjectController_UnitTest()
 		{			
@@ -37,7 +37,7 @@ namespace Beamer.UnitTest.Controllers
 			mockProjectService.Setup(service => service.UpdateProject(It.IsAny<long>(), It.IsAny<Project>())).ReturnsAsync(true);
 			mockProjectService.Setup(service => service.DeleteProject(It.IsAny<long>())).ReturnsAsync(true);
 			var mockMapper = new Mock<IMapper>();
-			_projectController = new ProjectController(mockProjectService.Object, mockMapper.Object);
+			sut = new ProjectController(mockProjectService.Object, mockMapper.Object);
 		}
 
 		[Fact]
@@ -46,7 +46,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var tenantId = Guid.NewGuid();
 			// Act
-			var response = await _projectController.GetProjects(tenantId);
+			var response = await sut.GetProjects(tenantId);
 			// Assert
 			Assert.IsType<ActionResult<IEnumerable<ProjectDTO>>>(response);
 		}
@@ -58,7 +58,7 @@ namespace Beamer.UnitTest.Controllers
 			var tenantId = Guid.NewGuid();
 			var projectId = 1;
 			// Act
-			var response = await _projectController.GetProject(projectId, tenantId);
+			var response = await sut.GetProject(projectId, tenantId);
 			// Assert
 			Assert.IsType<ActionResult<ProjectDetailsDTO>>(response);
 		}
@@ -79,7 +79,7 @@ namespace Beamer.UnitTest.Controllers
 				TenantId = tenantId
 			};
 			// Act
-			var response = await _projectController.CreateProject(project);
+			var response = await sut.CreateProject(project);
 			// Assert
 			Assert.IsType<CreatedAtActionResult>(response);
 		}
@@ -100,7 +100,7 @@ namespace Beamer.UnitTest.Controllers
 				TenantId = tenantId
 			};
 			// Act
-			var response = await _projectController.UpdateProject(project.Id, project);
+			var response = await sut.UpdateProject(project.Id, project);
 			// Assert
 			Assert.IsType<NoContentResult>(response);
 		}
@@ -111,7 +111,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var projectId = 1;
 			// Act
-			var response = await _projectController.DeleteProject(projectId);
+			var response = await sut.DeleteProject(projectId);
 			// Assert
 			Assert.IsType<NoContentResult>(response);
 		}

@@ -13,7 +13,7 @@ namespace Beamer.UnitTest.Services
 {
 	public class UserService_UnitTest
 	{
-		private UserService _userService;
+		private UserService sut;
 		private User _user;
 		private List<User> _users;
 
@@ -39,7 +39,7 @@ namespace Beamer.UnitTest.Services
 			mockUserRepository.Setup(service => service.CreateUsers(It.IsAny<IEnumerable<User>>())).ReturnsAsync(true);
 			mockUserRepository.Setup(service => service.UpdateUser(It.IsAny<long>(), It.IsAny<Domain.Models.User>())).ReturnsAsync(true);
 			mockUserRepository.Setup(service => service.DeleteUser(It.IsAny<long>())).ReturnsAsync(true);
-			_userService = new UserService(mockUserRepository.Object);
+			sut = new UserService(mockUserRepository.Object);
 		}
 
 		[Fact]
@@ -49,7 +49,7 @@ namespace Beamer.UnitTest.Services
 			var tenantId = Guid.NewGuid();
 			var expectedResult = _users;
 			// Act
-			var response = await _userService.GetUsers(tenantId);
+			var response = await sut.GetUsers(tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -62,7 +62,7 @@ namespace Beamer.UnitTest.Services
 			var userId = 1;
 			var expectedResult = _user;
 			// Act
-			var response = await _userService.GetUser(userId, tenantId);
+			var response = await sut.GetUser(userId, tenantId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -82,7 +82,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _userService.CreateUser(user);
+			var response = await sut.CreateUser(user);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -106,7 +106,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _userService.CreateUsers(users);
+			var response = await sut.CreateUsers(users);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -126,7 +126,7 @@ namespace Beamer.UnitTest.Services
 			};
 			var expectedResult = true;
 			// Act
-			var response = await _userService.UpdateUser(user.Id, user);
+			var response = await sut.UpdateUser(user.Id, user);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}
@@ -138,7 +138,7 @@ namespace Beamer.UnitTest.Services
 			var userId = 1;
 			var expectedResult = true;
 			// Act
-			var response = await _userService.DeleteUser(userId);
+			var response = await sut.DeleteUser(userId);
 			// Assert
 			Assert.Equal(response, expectedResult);
 		}

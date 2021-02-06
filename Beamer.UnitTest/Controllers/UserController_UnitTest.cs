@@ -12,7 +12,7 @@ namespace Beamer.UnitTest.Controllers
 {
 	public class UserController_UnitTest
 	{
-		private UserController _userController;
+		private UserController sut;
 
 		public UserController_UnitTest()
 		{
@@ -37,7 +37,7 @@ namespace Beamer.UnitTest.Controllers
 			mockUserService.Setup(service => service.UpdateUser(It.IsAny<long>(), It.IsAny<Domain.Models.User>())).ReturnsAsync(true);
 			mockUserService.Setup(service => service.DeleteUser(It.IsAny<long>())).ReturnsAsync(true);
 			var mockMapper = new Mock<IMapper>();
-			_userController = new UserController(mockUserService.Object, mockMapper.Object);
+			sut = new UserController(mockUserService.Object, mockMapper.Object);
 		}
 
 		[Fact]
@@ -46,7 +46,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var tenantId = Guid.NewGuid();
 			// Act
-			var response = await _userController.GetUsers(tenantId);
+			var response = await sut.GetUsers(tenantId);
 			// Assert
 			Assert.IsType<ActionResult<IEnumerable<UserDTO>>>(response);
 		}
@@ -58,7 +58,7 @@ namespace Beamer.UnitTest.Controllers
 			var tenantId = Guid.NewGuid();
 			var userId = 1;
 			// Act
-			var response = await _userController.GetUser(userId, tenantId);
+			var response = await sut.GetUser(userId, tenantId);
 			// Assert
 			Assert.IsType<ActionResult<UserDetailsDTO>>(response);
 		}
@@ -77,7 +77,7 @@ namespace Beamer.UnitTest.Controllers
 				TenantId = Guid.NewGuid()
 			};
 			// Act
-			var response = await _userController.CreateUser(user);
+			var response = await sut.CreateUser(user);
 			// Assert
 			Assert.IsType<CreatedAtActionResult>(response);
 		}
@@ -100,7 +100,7 @@ namespace Beamer.UnitTest.Controllers
 				user
 			};
 			// Act
-			var response = await _userController.CreateUsers(users);
+			var response = await sut.CreateUsers(users);
 			// Assert
 			Assert.IsType<CreatedAtActionResult>(response);
 		}
@@ -119,7 +119,7 @@ namespace Beamer.UnitTest.Controllers
 				TenantId = Guid.NewGuid()
 			};
 			// Act
-			var response = await _userController.UpdateUser(user.Id, user);
+			var response = await sut.UpdateUser(user.Id, user);
 			// Assert
 			Assert.IsType<OkResult>(response);
 		}
@@ -130,7 +130,7 @@ namespace Beamer.UnitTest.Controllers
 			// Arrange
 			var userId = 1;
 			// Act
-			var response = await _userController.DeleteUser(userId);
+			var response = await sut.DeleteUser(userId);
 			// Assert
 			Assert.IsType<OkResult>(response);
 		}
