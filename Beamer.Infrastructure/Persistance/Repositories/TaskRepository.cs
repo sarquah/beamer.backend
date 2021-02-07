@@ -49,13 +49,12 @@ namespace Beamer.Infrastructure.Persistance.Repositories
 
         public async Task<Domain.Models.Task> GetTask(long id, Guid tenantId)
         {
-            var task = await _context.Tasks
+            return await _context.Tasks
                 .AsNoTracking()
                 .Include(t => t.Owner)
                 .Include(t => t.Project)
                     .ThenInclude(p => p.Owner)
                     .FirstOrDefaultAsync(t => t.Id == id && t.TenantId == tenantId);
-            return task;
         }
 
         public async Task<IEnumerable<Domain.Models.Task>> GetTasks(Guid tenantId)
