@@ -4,23 +4,21 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Beamer.UnitTest.Repositories
 {
-	public class TaskRepository_UnitTest : Repository_Init
+	public class TaskRepository_UnitTest : Repository_UnitTest
 	{
 		private TaskRepository sut;
-		private Domain.Models.Task task;
-		private IEnumerable<Domain.Models.Task> tasks;
+		private Task task;
+		private IEnumerable<Task> tasks;
 
 		public TaskRepository_UnitTest() : base()
 		{
 
 			sut = new TaskRepository(_context);
-			task = new Domain.Models.Task()
+			task = new Task()
 			{
 				Name = "Test Unit Task",
 				StartDate = new DateTime(2019, 8, 8),
@@ -29,7 +27,7 @@ namespace Beamer.UnitTest.Repositories
 				Status = EStatus.NotStarted,
 				TenantId = Guid.NewGuid()
 			};
-			tasks = new List<Domain.Models.Task>()
+			tasks = new List<Task>()
 			{
 				task
 			};
@@ -53,13 +51,11 @@ namespace Beamer.UnitTest.Repositories
 		{
 			// Arrange
 			await sut.CreateTask(task);
-			var tasks = await sut.GetTasks(task.TenantId);
-			var id = tasks.First().Id;
-			var taskCopy = task;
-			taskCopy.Id = id;
-			var expectedResult = JsonConvert.SerializeObject(taskCopy);
+			var getTasks = await sut.GetTasks(task.TenantId);
+			task.Id = getTasks.First().Id;
+			var expectedResult = JsonConvert.SerializeObject(task);
 			// Act
-			var result = await sut.GetTask(id, task.TenantId);
+			var result = await sut.GetTask(task.Id, task.TenantId);
 			var stringResult = JsonConvert.SerializeObject(result);
 			// Assert
 			Assert.Equal(expectedResult, stringResult);
@@ -82,10 +78,10 @@ namespace Beamer.UnitTest.Repositories
 			// Arrange
 			await sut.CreateTask(task);
 			_context.Entry(task).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-			var tasks = await sut.GetTasks(task.TenantId);
-			var id = tasks.First().Id;
+			var getTasks = await sut.GetTasks(task.TenantId);
+			var id = getTasks.First().Id;
 			var expectedResult = true;
-			var updatedTask = new Domain.Models.Task()
+			var updatedTask = new Task()
 			{
 				Id = id,
 				Name = "Test Unit Task Update",
@@ -102,13 +98,13 @@ namespace Beamer.UnitTest.Repositories
 		}
 
 		[Fact]
-		public async System.Threading.Tasks.Task Delete_Project_Returns_True()
+		public async System.Threading.Tasks.Task Delete_Task_Returns_True()
 		{
 			// Arrange		
 			await sut.CreateTask(task);
 			_context.Entry(task).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-			var tasks = await sut.GetTasks(task.TenantId);
-			var id = tasks.First().Id;
+			var getTasks = await sut.GetTasks(task.TenantId);
+			var id = getTasks.First().Id;
 			var expectedResult = true;
 			// Act
 			var result = await sut.DeleteTask(id);

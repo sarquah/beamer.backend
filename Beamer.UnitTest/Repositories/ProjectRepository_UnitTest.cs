@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Beamer.UnitTest.Repositories
 {
-	public class ProjectRepository_UnitTest : Repository_Init
+	public class ProjectRepository_UnitTest : Repository_UnitTest
 	{
 		private ProjectRepository sut;
 		private Project project;
@@ -50,13 +50,11 @@ namespace Beamer.UnitTest.Repositories
 		{
 			// Arrange
 			await sut.CreateProject(project);
-			var projects = await sut.GetProjects(project.TenantId);
-			var id = projects.First().Id;
-			var projectCopy = project;
-			projectCopy.Id = id;
-			var expectedResult = JsonConvert.SerializeObject(projectCopy);
+			var getProjects = await sut.GetProjects(project.TenantId);
+			project.Id = getProjects.First().Id;
+			var expectedResult = JsonConvert.SerializeObject(project);
 			// Act
-			var result = await sut.GetProject(id, project.TenantId);
+			var result = await sut.GetProject(project.Id, project.TenantId);
 			var stringResult = JsonConvert.SerializeObject(result);
 			// Assert
 			Assert.Equal(expectedResult, stringResult);
@@ -79,8 +77,8 @@ namespace Beamer.UnitTest.Repositories
 			// Arrange
 			await sut.CreateProject(project);
 			_context.Entry(project).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-			var projects = await sut.GetProjects(project.TenantId);
-			var id = projects.First().Id;
+			var getProjects = await sut.GetProjects(project.TenantId);
+			var id = getProjects.First().Id;
 			var expectedResult = true;
 			var updatedProject = new Project()
 			{
@@ -104,8 +102,8 @@ namespace Beamer.UnitTest.Repositories
 			// Arrange		
 			await sut.CreateProject(project);
 			_context.Entry(project).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
-			var projects = await sut.GetProjects(project.TenantId);
-			var id = projects.First().Id;
+			var getProjects = await sut.GetProjects(project.TenantId);
+			var id = getProjects.First().Id;
 			var expectedResult = true;
 			// Act
 			var result = await sut.DeleteProject(id);

@@ -50,13 +50,12 @@ namespace Beamer.Infrastructure.Persistance.Repositories
 
         public async Task<Project> GetProject(long id, Guid tenantId)
         {
-            var project = await _context.Projects
+            return await _context.Projects
                 .AsNoTracking()
                 .Include(p => p.Tasks)
                     .ThenInclude(t => t.Owner)
                 .Include(p => p.Owner)            
                 .FirstOrDefaultAsync(p => p.Id == id && p.TenantId == tenantId);
-            return project;
         }
 
         public async Task<IEnumerable<Project>> GetProjects(Guid tenantId)

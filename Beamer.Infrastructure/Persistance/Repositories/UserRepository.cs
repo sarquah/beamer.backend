@@ -71,10 +71,9 @@ namespace Beamer.Infrastructure.Persistance.Repositories
 
         public async Task<User> GetUser(long id, Guid tenantId)
         {
-            var user = await _context.Users
+            return await _context.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == id && u.TenantId == tenantId);
-            return user;
         }
 
         public async Task<IEnumerable<User>> GetUsers(Guid tenantId)
