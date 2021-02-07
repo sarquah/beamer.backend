@@ -35,7 +35,7 @@ namespace Beamer.IntegrationTests
 					services.Remove(descriptor);
 					services.AddDbContext<AppDbContext>(options =>
 					{
-						options.UseInMemoryDatabase("BeamerDB.Test");
+						options.UseInMemoryDatabase("BeamerDB.IntegrationTest");
 					});
 					services.AddLogging(builder => builder.AddConsole());
 				})
