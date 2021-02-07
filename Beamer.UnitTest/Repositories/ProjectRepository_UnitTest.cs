@@ -63,7 +63,7 @@ namespace Beamer.UnitTest.Repositories
 		}
 
 		[Fact]
-		public async System.Threading.Tasks.Task Create_Project_Return_True()
+		public async System.Threading.Tasks.Task Create_Project_Returns_True()
 		{
 			// Arrange
 			var expectedResult = true;
@@ -99,7 +99,7 @@ namespace Beamer.UnitTest.Repositories
 		}
 
 		[Fact]
-		public async System.Threading.Tasks.Task Delete_Project_Test()
+		public async System.Threading.Tasks.Task Delete_Project_Returns_True()
 		{
 			// Arrange		
 			await sut.CreateProject(project);
