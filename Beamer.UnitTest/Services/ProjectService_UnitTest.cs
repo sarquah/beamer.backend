@@ -49,7 +49,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetProjects(tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -62,7 +62,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetProject(projectId, tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -84,7 +84,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.CreateProject(project);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -106,7 +106,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.UpdateProject(project.Id, project);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -118,7 +118,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.DeleteProject(projectId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 	}
 }

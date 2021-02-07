@@ -51,7 +51,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetUsers(tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -64,7 +64,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetUser(userId, tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -84,7 +84,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.CreateUser(user);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -108,7 +108,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.CreateUsers(users);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -128,7 +128,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.UpdateUser(user.Id, user);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -140,7 +140,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.DeleteUser(userId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 	}
 }

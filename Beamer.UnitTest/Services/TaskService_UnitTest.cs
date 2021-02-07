@@ -53,7 +53,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetTasks(tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -66,7 +66,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.GetTask(taskId, tenantId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -90,7 +90,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.CreateTask(task);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -114,7 +114,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.UpdateTask(task.Id, task);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 
 		[Fact]
@@ -126,7 +126,7 @@ namespace Beamer.UnitTest.Services
 			// Act
 			var response = await sut.DeleteTask(taskId);
 			// Assert
-			Assert.Equal(response, expectedResult);
+			Assert.Equal(expectedResult, response);
 		}
 	}
 }
