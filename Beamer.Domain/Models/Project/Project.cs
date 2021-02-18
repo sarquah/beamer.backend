@@ -4,6 +4,12 @@ namespace Beamer.Domain.Models
 {
     public class Project : Activity
     {
-        public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+        public ICollection<Task> Tasks { get; set; }
+
+		public Project()
+		{
+            Tasks = new List<Task>();
+		}
+
     }
 }

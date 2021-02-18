@@ -4,6 +4,11 @@ namespace Beamer.Domain.Models
 {
     public class ProjectDTO : ActivityDTO
     {
-        public virtual ICollection<TaskDTO> Tasks { get; set; } = new List<TaskDTO>();
+        public ICollection<TaskDTO> Tasks { get; set; }
+
+		public ProjectDTO()
+		{
+			Tasks = new List<TaskDTO>();
+		}
     }
 }
