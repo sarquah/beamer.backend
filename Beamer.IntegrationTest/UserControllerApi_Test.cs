@@ -9,7 +9,7 @@ using Task = System.Threading.Tasks.Task;
 using System.Threading.Tasks;
 using System;
 
-namespace Beamer.IntegrationTests
+namespace Beamer.IntegrationTest
 {
 	public class UserControllerApi_Test : IntegrationTest
     {

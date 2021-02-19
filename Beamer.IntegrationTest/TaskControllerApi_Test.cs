@@ -8,7 +8,7 @@ using Xunit;
 using Task = System.Threading.Tasks.Task;
 using System.Threading.Tasks;
 
-namespace Beamer.IntegrationTests
+namespace Beamer.IntegrationTest
 {
 	public class TaskControllerApi_Test : IntegrationTest
     {

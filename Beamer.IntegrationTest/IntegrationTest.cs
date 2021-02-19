@@ -16,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebMotions.Fake.Authentication.JwtBearer;
 
-namespace Beamer.IntegrationTests
+namespace Beamer.IntegrationTest
 {
 	public abstract class IntegrationTest
 	{
@@ -107,6 +107,24 @@ namespace Beamer.IntegrationTests
 			var response = await _client.PostAsync($"/api/v1/user", userRequest);
 			response.EnsureSuccessStatusCode();
 			return JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
+		}
+
+		protected async Task<TimeRegistration> CreateTestTimeRegistration()
+		{
+			var task = await CreateTestTask();
+			var user = await CreateTestUser();
+			var timeRegistration = new TimeRegistration()
+			{
+				StartDate = new DateTime(2021, 2, 19, 9, 0, 0),
+				EndDate = new DateTime(2021, 2, 19, 12, 0, 0),
+				TenantId = Guid.NewGuid(),
+				TaskId = task.Id,
+				OwnerId = user.Id
+			};
+			var timeRegistrationRequest = new StringContent(JsonConvert.SerializeObject(timeRegistration), Encoding.UTF8, "application/json");
+			var response = await _client.PostAsync($"/api/v1/timeregistration?tenantId={timeRegistration.TenantId}", timeRegistrationRequest);
+			response.EnsureSuccessStatusCode();
+			return JsonConvert.DeserializeObject<TimeRegistration>(await response.Content.ReadAsStringAsync());
 		}
 	}
 }
