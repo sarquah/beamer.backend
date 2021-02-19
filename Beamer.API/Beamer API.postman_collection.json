@@ -1,0 +1,1635 @@
+{
+	"info": {
+		"_postman_id": "0b7e661d-19e0-4936-86c2-8249ae4a4cad",
+		"name": "Beamer API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api/v1",
+			"item": [
+				{
+					"name": "project",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/v1/project/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/project/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"project",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/project/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"project",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": 74947755,\n \"name\": \"ut aute deserunt dolore\",\n \"description\": \"sed dolor\",\n \"status\": \"<integer>\",\n \"startDate\": \"1962-09-09T21:32:30.725Z\",\n \"endDate\": \"2016-01-01T08:39:23.250Z\",\n \"ownerId\": -96851729,\n \"ownerName\": \"dolor culpa\",\n \"tasks\": [\n  {\n   \"id\": -35275172,\n   \"name\": \"et do\",\n   \"description\": \"voluptate fugiat sed\",\n   \"status\": \"<integer>\",\n   \"startDate\": \"1985-03-08T10:37:42.879Z\",\n   \"endDate\": \"2014-12-04T10:00:59.520Z\",\n   \"ownerId\": -49701174,\n   \"ownerName\": \"Ut laboris\",\n   \"projectId\": -23088295\n  },\n  {\n   \"id\": 17059247,\n   \"name\": \"ullamco\",\n   \"description\": \"in do et\",\n   \"status\": \"<integer>\",\n   \"startDate\": \"1941-06-04T01:45:27.553Z\",\n   \"endDate\": \"2004-02-25T23:45:39.523Z\",\n   \"ownerId\": 61281544,\n   \"ownerName\": \"nisi qui non vel\",\n   \"projectId\": -34773237\n  }\n ]\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/v1/project/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"tasks\": [\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        },\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/project/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"project",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"tasks\": [\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        },\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/project/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"project",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/v1/project/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/project/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"project",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/project/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"project",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/v1/project",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"tasks\": [\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        },\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/project",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"project"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"tasks\": [\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        },\n        {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"projectId\": \"<long>\",\n            \"project\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"description\": \"<string>\",\n                \"status\": \"<integer>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"tenantId\": \"<uuid>\",\n                \"tasks\": [\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    }\n                ]\n            },\n            \"timeRegistrations\": [\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                },\n                {\n                    \"id\": \"<long>\",\n                    \"startDate\": \"<dateTime>\",\n                    \"endDate\": \"<dateTime>\",\n                    \"ownerId\": \"<long>\",\n                    \"owner\": {\n                        \"id\": \"<long>\",\n                        \"name\": \"<string>\",\n                        \"department\": \"<string>\",\n                        \"role\": \"<string>\",\n                        \"email\": \"<string>\",\n                        \"tenantId\": \"<uuid>\"\n                    },\n                    \"taskId\": \"<long>\",\n                    \"task\": {\n                        \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                    },\n                    \"tenantId\": \"<uuid>\"\n                }\n            ]\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/project",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"project"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/project/projects",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/project/projects?tenantId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"project",
+										"projects"
+									],
+									"query": [
+										{
+											"key": "tenantId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/project/projects?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"project",
+												"projects"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": -81466899,\n  \"name\": \"exercitation laboris voluptate eiusmod\",\n  \"status\": \"<integer>\",\n  \"ownerId\": 97668899,\n  \"ownerName\": \"sed fugiat esse\",\n  \"description\": \"Duis nulla laboris laborum\",\n  \"tasks\": [\n   {\n    \"id\": -94709364,\n    \"name\": \"aute adipisicing irure\",\n    \"status\": \"<integer>\",\n    \"ownerId\": 83941612,\n    \"ownerName\": \"cupidatat amet reprehenderit\",\n    \"description\": \"consectetur culp\",\n    \"projectId\": -31523162\n   },\n   {\n    \"id\": -4669269,\n    \"name\": \"anim do aute\",\n    \"status\": \"<integer>\",\n    \"ownerId\": -65289872,\n    \"ownerName\": \"qui dolor exercitation\",\n    \"description\": \"commodo est quis ex\",\n    \"projectId\": -88066008\n   }\n  ]\n },\n {\n  \"id\": 99350079,\n  \"name\": \"elit sit laboris officia\",\n  \"status\": \"<integer>\",\n  \"ownerId\": 25469826,\n  \"ownerName\": \"voluptate et\",\n  \"description\": \"adipisicing in\",\n  \"tasks\": [\n   {\n    \"id\": 76512001,\n    \"name\": \"id\",\n    \"status\": \"<integer>\",\n    \"ownerId\": -40818636,\n    \"ownerName\": \"commodo magna eu ullamco\",\n    \"description\": \"sed qui\",\n    \"projectId\": 76014793\n   },\n   {\n    \"id\": 80344312,\n    \"name\": \"dolore reprehenderit eiusmod commodo Excepteur\",\n    \"status\": \"<integer>\",\n    \"ownerId\": -27878349,\n    \"ownerName\": \"eiusmod non ali\",\n    \"description\": \"aliquip voluptate Excepteur non\",\n    \"projectId\": -23371618\n   }\n  ]\n }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "task",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/v1/task/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/task/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"task",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/task/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"task",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": -92828149,\n \"name\": \"aliqua\",\n \"description\": \"deserunt aliquip in non\",\n \"status\": \"<integer>\",\n \"startDate\": \"2003-05-11T19:14:30.115Z\",\n \"endDate\": \"1969-04-11T22:48:55.672Z\",\n \"ownerId\": -35132173,\n \"ownerName\": \"pariatu\",\n \"projectId\": 51679189\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/v1/task/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"projectId\": \"<long>\",\n    \"project\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"tasks\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            }\n        ]\n    },\n    \"timeRegistrations\": [\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        },\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/task/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"task",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"projectId\": \"<long>\",\n    \"project\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"tasks\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            }\n        ]\n    },\n    \"timeRegistrations\": [\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        },\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        }\n    ]\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/task/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"task",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/v1/task/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/task/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"task",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/task/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"task",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/v1/task",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"projectId\": \"<long>\",\n    \"project\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"tasks\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            }\n        ]\n    },\n    \"timeRegistrations\": [\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        },\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/task",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"task"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"<integer>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"tenantId\": \"<uuid>\",\n    \"projectId\": \"<long>\",\n    \"project\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"tasks\": [\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            }\n        ]\n    },\n    \"timeRegistrations\": [\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        },\n        {\n            \"id\": \"<long>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"taskId\": \"<long>\",\n            \"task\": {\n                \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n            },\n            \"tenantId\": \"<uuid>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/task",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"task"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/task/tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/task/tasks?tenantId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "tenantId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/task/tasks?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"task",
+												"tasks"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": -99382354,\n  \"name\": \"non aute\",\n  \"status\": \"<integer>\",\n  \"ownerId\": -38099260,\n  \"ownerName\": \"est officia Ut ut\",\n  \"description\": \"proident minim est ullamco ad\",\n  \"projectId\": -47381095\n },\n {\n  \"id\": 7068290,\n  \"name\": \"sint id in ad\",\n  \"status\": \"<integer>\",\n  \"ownerId\": 23891283,\n  \"ownerName\": \"in sint consequat\",\n  \"description\": \"sed elit\",\n  \"projectId\": 15217245\n }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "timeregistration",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/v1/timeregistration/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"timeregistration",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"timeregistration",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": \"<long>\",\n \"startDate\": \"<dateTime>\",\n \"endDate\": \"<dateTime>\",\n \"ownerId\": \"<long>\",\n \"owner\": {\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"department\": \"<string>\",\n  \"role\": \"<string>\",\n  \"email\": \"<string>\",\n  \"tenantId\": \"<uuid>\"\n },\n \"taskId\": \"<long>\",\n \"task\": {\n  \"id\": \"<long>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"ownerId\": \"<long>\",\n  \"owner\": {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\",\n   \"department\": \"<string>\",\n   \"role\": \"<string>\",\n   \"email\": \"<string>\",\n   \"tenantId\": \"<uuid>\"\n  },\n  \"tenantId\": \"<uuid>\",\n  \"projectId\": \"<long>\",\n  \"project\": {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\",\n   \"description\": \"<string>\",\n   \"status\": \"<integer>\",\n   \"startDate\": \"<dateTime>\",\n   \"endDate\": \"<dateTime>\",\n   \"ownerId\": \"<long>\",\n   \"owner\": {\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"department\": \"<string>\",\n    \"role\": \"<string>\",\n    \"email\": \"<string>\",\n    \"tenantId\": \"<uuid>\"\n   },\n   \"tenantId\": \"<uuid>\",\n   \"tasks\": [\n    {\n     \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n    },\n    {\n     \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n    }\n   ]\n  },\n  \"timeRegistrations\": [\n   {\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n     \"id\": \"<long>\",\n     \"name\": \"<string>\",\n     \"department\": \"<string>\",\n     \"role\": \"<string>\",\n     \"email\": \"<string>\",\n     \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n     \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n    },\n    \"tenantId\": \"<uuid>\"\n   },\n   {\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n     \"id\": \"<long>\",\n     \"name\": \"<string>\",\n     \"department\": \"<string>\",\n     \"role\": \"<string>\",\n     \"email\": \"<string>\",\n     \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n     \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n    },\n    \"tenantId\": \"<uuid>\"\n   }\n  ]\n },\n \"tenantId\": \"<uuid>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/v1/timeregistration/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"projectId\": \"<long>\",\n        \"project\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"tasks\": [\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                }\n            ]\n        },\n        \"timeRegistrations\": [\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            },\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            }\n        ]\n    },\n    \"tenantId\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"timeregistration",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"projectId\": \"<long>\",\n        \"project\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"tasks\": [\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                }\n            ]\n        },\n        \"timeRegistrations\": [\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            },\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            }\n        ]\n    },\n    \"tenantId\": \"<uuid>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"timeregistration",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/v1/timeregistration/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"timeregistration",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/timeregistration/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"timeregistration",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/v1/timeregistration",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"projectId\": \"<long>\",\n        \"project\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"tasks\": [\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                }\n            ]\n        },\n        \"timeRegistrations\": [\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            },\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            }\n        ]\n    },\n    \"tenantId\": \"<uuid>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/timeregistration?tenantId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"timeregistration"
+									],
+									"query": [
+										{
+											"key": "tenantId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\",\n    \"ownerId\": \"<long>\",\n    \"owner\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    \"taskId\": \"<long>\",\n    \"task\": {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"<integer>\",\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\",\n        \"ownerId\": \"<long>\",\n        \"owner\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"department\": \"<string>\",\n            \"role\": \"<string>\",\n            \"email\": \"<string>\",\n            \"tenantId\": \"<uuid>\"\n        },\n        \"tenantId\": \"<uuid>\",\n        \"projectId\": \"<long>\",\n        \"project\": {\n            \"id\": \"<long>\",\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"status\": \"<integer>\",\n            \"startDate\": \"<dateTime>\",\n            \"endDate\": \"<dateTime>\",\n            \"ownerId\": \"<long>\",\n            \"owner\": {\n                \"id\": \"<long>\",\n                \"name\": \"<string>\",\n                \"department\": \"<string>\",\n                \"role\": \"<string>\",\n                \"email\": \"<string>\",\n                \"tenantId\": \"<uuid>\"\n            },\n            \"tenantId\": \"<uuid>\",\n            \"tasks\": [\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                }\n            ]\n        },\n        \"timeRegistrations\": [\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            },\n            {\n                \"id\": \"<long>\",\n                \"startDate\": \"<dateTime>\",\n                \"endDate\": \"<dateTime>\",\n                \"ownerId\": \"<long>\",\n                \"owner\": {\n                    \"id\": \"<long>\",\n                    \"name\": \"<string>\",\n                    \"department\": \"<string>\",\n                    \"role\": \"<string>\",\n                    \"email\": \"<string>\",\n                    \"tenantId\": \"<uuid>\"\n                },\n                \"taskId\": \"<long>\",\n                \"task\": {\n                    \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n                },\n                \"tenantId\": \"<uuid>\"\n            }\n        ]\n    },\n    \"tenantId\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/timeregistration?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"timeregistration"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "/api/v1/timeregistration/timeregistrations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/timeregistration/timeregistrations?taskId=<long>&tenantId=<uuid>",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"timeregistration",
+										"timeregistrations"
+									],
+									"query": [
+										{
+											"key": "taskId",
+											"value": "<long>"
+										},
+										{
+											"key": "tenantId",
+											"value": "<uuid>"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/timeregistration/timeregistrations?taskId=<long>&tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"timeregistration",
+												"timeregistrations"
+											],
+											"query": [
+												{
+													"key": "taskId",
+													"value": "<long>"
+												},
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": \"<long>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"ownerId\": \"<long>\",\n  \"owner\": {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\",\n   \"department\": \"<string>\",\n   \"role\": \"<string>\",\n   \"email\": \"<string>\",\n   \"tenantId\": \"<uuid>\"\n  },\n  \"taskId\": \"<long>\",\n  \"task\": {\n   \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n  },\n  \"tenantId\": \"<uuid>\"\n },\n {\n  \"id\": \"<long>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"ownerId\": \"<long>\",\n  \"owner\": {\n   \"id\": \"<long>\",\n   \"name\": \"<string>\",\n   \"department\": \"<string>\",\n   \"role\": \"<string>\",\n   \"email\": \"<string>\",\n   \"tenantId\": \"<uuid>\"\n  },\n  \"taskId\": \"<long>\",\n  \"task\": {\n   \"value\": \"<Circular reference to #/components/schemas/Task detected>\"\n  },\n  \"tenantId\": \"<uuid>\"\n }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "users",
+							"item": [
+								{
+									"name": "/api/v1/user/users",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user/users?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"users"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/user/users?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"users"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n {\n  \"id\": 90982031,\n  \"name\": \"veniam dolor culpa elit\"\n },\n {\n  \"id\": -54907628,\n  \"name\": \"culpa nisi ve\"\n }\n]"
+										}
+									]
+								},
+								{
+									"name": "/api/v1/user/users",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user/users",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												"users"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n    {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    },\n    {\n        \"id\": \"<long>\",\n        \"name\": \"<string>\",\n        \"department\": \"<string>\",\n        \"role\": \"<string>\",\n        \"email\": \"<string>\",\n        \"tenantId\": \"<uuid>\"\n    }\n]"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/user/users",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														"users"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "/api/v1/user/:id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user/:id?tenantId=<uuid>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												":id"
+											],
+											"query": [
+												{
+													"key": "tenantId",
+													"value": "<uuid>"
+												}
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/user/:id?tenantId=<uuid>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														":id"
+													],
+													"query": [
+														{
+															"key": "tenantId",
+															"value": "<uuid>"
+														}
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"id\": -60681389,\n \"name\": \"Duis Lorem do eu\",\n \"department\": \"sed sit Excepteur incididunt\",\n \"role\": \"non ad aute esse\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/api/v1/user/:id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"department\": \"<string>\",\n    \"role\": \"<string>\",\n    \"email\": \"<string>\",\n    \"tenantId\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"department\": \"<string>\",\n    \"role\": \"<string>\",\n    \"email\": \"<string>\",\n    \"tenantId\": \"<uuid>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/api/v1/user/:id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/v1/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"v1",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "/api/v1/user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"department\": \"<string>\",\n    \"role\": \"<string>\",\n    \"email\": \"<string>\",\n    \"tenantId\": \"<uuid>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"department\": \"<string>\",\n    \"role\": \"<string>\",\n    \"email\": \"<string>\",\n    \"tenantId\": \"<uuid>\"\n}"
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/v1/user",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"v1",
+												"user"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "scope",
+				"value": "{{scope}}",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "{{callbackUrl}}",
+				"type": "string"
+			},
+			{
+				"key": "useBrowser",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "clientSecret",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/token",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/authorize",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Azure AD",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{clientId}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:65100"
+		},
+		{
+			"key": "clientId",
+			"value": "0bc4c2d9-f295-4ea8-b8da-f049c2c7743b"
+		},
+		{
+			"key": "tenantId",
+			"value": "fb0d02c2-f1bf-4146-a18a-5ffe03bbb4e2"
+		},
+		{
+			"key": "callbackUrl",
+			"value": "http://localhost:4200"
+		},
+		{
+			"key": "scope",
+			"value": "api://e2a46ce5-1cd4-46e7-b7ed-e4fffd1d7f16/Beamer"
+		}
+	]
+}
